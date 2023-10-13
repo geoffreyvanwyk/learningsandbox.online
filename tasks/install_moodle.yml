@@ -26,6 +26,7 @@
   vars:
     moodle_deploy_version: "{{ sandbox_item.branch }}"
     moodle_deploy_destination: /var/www/html/moodle-{{ sandbox_item.version }}
+    moodle_web_protocol: https
     moodle_web_domain: "{{ sandbox_domain }}"
     moodle_web_path: moodle-{{ sandbox_item.version }}
     moodle_cfg_dbname: moodle-{{ sandbox_item.version | replace(".", "") }}
