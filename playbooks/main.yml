@@ -15,10 +15,30 @@
 # Online Learning Sandbox. If not, see <https://www.gnu.org/licenses/>.
 
 ##
-# List of roles on which this project depends.
+# Primary playbook of this project.
 #
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
-- name: geoffreyvanwyk.moodle
-  src: git+https://github.com/geoffreyvanwyk/ansible-role-moodle.git
+- name: Create Moodle sandboxes
+  hosts: all
+
+  vars_files:
+    - ../defaults/main.yml
+
+  tasks:
+    - name: Install Moodle instances
+      loop:
+        - branch: MOODLE_39_STABLE
+          version: 3.9
+        - branch: MOODLE_311_STABLE
+          version: 3.11
+        - branch: MOODLE_400_STABLE
+          version: 4.0
+        - branch: MOODLE_401_STABLE
+          version: 4.1
+        - branch: MOODLE_402_STABLE
+          version: 4.2
+      loop_control:
+        loop_var: sandbox_item
+      ansible.builtin.include_tasks: ../tasks/install_moodle.yml

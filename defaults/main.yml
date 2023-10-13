@@ -15,10 +15,9 @@
 # Online Learning Sandbox. If not, see <https://www.gnu.org/licenses/>.
 
 ##
-# List of roles on which this project depends.
+# Default values for sandbox variables.
 #
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
-- name: geoffreyvanwyk.moodle
-  src: git+https://github.com/geoffreyvanwyk/ansible-role-moodle.git
+sandbox_domain: onlinelearningsandbox.com
