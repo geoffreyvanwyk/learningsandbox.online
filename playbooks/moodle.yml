@@ -15,22 +15,20 @@
 # Online Learning Sandbox. If not, see <https://www.gnu.org/licenses/>.
 
 ##
-# Default values for sandbox variables.
+# Playbook for installing the Moodle instances.
 #
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
-sandbox_domain: onlinelearningsandbox.com
-sandbox_email: info@onlinelearningsandbox.com
+- name: Moodle
+  hosts: all
 
-sandbox_versions:
-  - branch: MOODLE_39_STABLE
-    version: 3.9
-  - branch: MOODLE_311_STABLE
-    version: 3.11
-  - branch: MOODLE_400_STABLE
-    version: 4.0
-  - branch: MOODLE_401_STABLE
-    version: 4.1
-  - branch: MOODLE_402_STABLE
-    version: 4.2
+  vars_files:
+    - ../defaults/main.yml
+
+  tasks:
+    - name: Install Moodle instances
+      loop: "{{ sandbox_versions }}"
+      loop_control:
+        loop_var: sandbox_item
+      ansible.builtin.include_tasks: ../tasks/install_moodle.yml

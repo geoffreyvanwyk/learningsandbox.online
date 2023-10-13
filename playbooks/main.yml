@@ -20,75 +20,8 @@
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
-- name: Create Moodle sandboxes
-  hosts: all
+- name: Set up Homepage
+  ansible.builtin.import_playbook: ./homepage.yml
 
-  vars_files:
-    - ../defaults/main.yml
-
-  vars:
-    sandbox_versions:
-      - branch: MOODLE_39_STABLE
-        version: 3.9
-      - branch: MOODLE_311_STABLE
-        version: 3.11
-      - branch: MOODLE_400_STABLE
-        version: 4.0
-      - branch: MOODLE_401_STABLE
-        version: 4.1
-      - branch: MOODLE_402_STABLE
-        version: 4.2
-
-  tasks:
-    - name: Install TLS certificate for OnlineLearningSandbox.com
-      ansible.builtin.include_role:
-        name: geerlingguy.certbot
-        apply:
-          become: true
-      vars:
-        certbot_create_if_missing: true
-        certbot_create_standalone_stop_services:
-          - apache2
-        certbot_certs:
-          - webroot: /var/www/html/moodle
-            domains:
-              - onlinelearningsandbox.com
-            email: info@onlinelearningsandbox.com
-
-    - name: Deploy Apache virtualhost configuration
-      become: true
-      loop:
-        - onlinelearningsandbox.com.conf
-        - onlinelearningsandbox.com-ssl.conf
-      ansible.builtin.copy:
-        src: "{{ inventory_dir }}/files/{{ item }}"
-        dest: /etc/apache2/sites-available/{{ item }}
-        owner: root
-        group: root
-        mode: u=rw,g=r,o=r
-
-    - name: Enable Apache virtual host configuration
-      become: true
-      loop:
-        - onlinelearningsandbox.com.conf
-        - onlinelearningsandbox.com-ssl.conf
-      ansible.builtin.command: a2ensite {{ item }}
-      changed_when: true
-
-    - name: Enable SSL module for Apache
-      become: true
-      community.general.apache2_module:
-        name: ssl
-        state: present
-
-    - name: Restart Apache web service
-      become: true
-      ansible.builtin.sysvinit:
-        name: apache2
-        state: restarted
-
-    - name: Install Moodle instances
-      loop: "{{ sandbox_versions }}"
-      loop_control:
-        loop_var: sandbox_item
-      ansible.builtin.include_tasks: ../tasks/install_moodle.yml
+- name: Install Moodle instances
+  ansible.builtin.import_playbook: ./moodle.yml
