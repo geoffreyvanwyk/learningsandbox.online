@@ -73,3 +73,12 @@
       ansible.builtin.sysvinit:
         name: apache2
         state: restarted
+
+    - name: Deploy home page
+      become: true
+      ansible.builtin.template:
+        src: "{{ inventory_dir }}/files/index.html"
+        dest: /var/www/html/index.html
+        owner: root
+        group: root
+        mode: u=rw,g=r,o=r
