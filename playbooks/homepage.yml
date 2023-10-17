@@ -40,6 +40,11 @@
           - domains:
               - "{{ sandbox_domain }}"
             email: "{{ sandbox_email }}"
+
+          # A bug with the geerlingguy.certbot role is that it if a certificate
+          # exists for the first domain in the list, it will not generate
+          # certificates for the rest of the domains.
+          # See https://github.com/geerlingguy/ansible-role-certbot/issues/187
           - domains: "{{ sandbox_domain_aliases }}"
             email: "{{ sandbox_email }}"
 
