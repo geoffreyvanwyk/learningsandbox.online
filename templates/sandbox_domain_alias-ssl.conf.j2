@@ -1,0 +1,15 @@
+<VirtualHost *:443>
+    ServerName {{ sandbox_domain_alias }}
+    Redirect permanent / https://{{ sandbox_domain }}
+
+    <IfModule mod_ssl.c>
+        SSLEngine On
+        SSLCertificateFile /etc/letsencrypt/live/{{ sandbox_domain_alias }}/fullchain.pem
+        SSLCertificateKeyFile /etc/letsencrypt/live/{{ sandbox_domain_alias }}/privkey.pem
+    </IfModule>
+
+    ErrorLog ${APACHE_LOG_DIR}/{{ sandbox_domain_alias }}-error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet

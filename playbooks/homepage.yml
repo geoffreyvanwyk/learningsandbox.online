@@ -27,7 +27,7 @@
     - ../defaults/main.yml
 
   tasks:
-    - name: Install TLS certificate for OnlineLearningSandbox.com
+    - name: Install TLS certificates
       ansible.builtin.include_role:
         name: geerlingguy.certbot
         apply:
@@ -37,30 +37,37 @@
         certbot_create_standalone_stop_services:
           - apache2
         certbot_certs:
-          - webroot: /var/www/html/moodle
-            domains:
+          - domains:
               - "{{ sandbox_domain }}"
             email: "{{ sandbox_email }}"
+          - domains: "{{ sandbox_domain_aliases }}"
+            email: "{{ sandbox_email }}"
 
-    - name: Deploy Apache virtualhost configuration
+    - name: Deploy Apache virtualhost configuration for sandbox
       become: true
       loop:
-        - "{{ sandbox_domain }}.conf"
-        - "{{ sandbox_domain }}-ssl.conf"
-      ansible.builtin.copy:
-        src: "{{ inventory_dir }}/files/{{ item }}"
-        dest: /etc/apache2/sites-available/{{ item }}
+        - .conf
+        - -ssl.conf
+      ansible.builtin.template:
+        src: "{{ inventory_dir }}/templates/sandbox_domain{{ item }}.j2"
+        dest: /etc/apache2/sites-available/{{ sandbox_domain }}{{ item }}
         owner: root
         group: root
         mode: u=rw,g=r,o=r
 
-    - name: Enable Apache virtual host configuration
+    - name: Enable Apache virtual host configuration for sandbox
       become: true
       loop:
         - "{{ sandbox_domain }}.conf"
         - "{{ sandbox_domain }}-ssl.conf"
       ansible.builtin.command: a2ensite {{ item }}
       changed_when: true
+
+    - name: Deploy and enable Apache virtualhost configurations for sandbox aliases
+      loop: "{{ sandbox_domain_aliases }}"
+      loop_control:
+        loop_var: sandbox_domain_alias
+      ansible.builtin.include_tasks: ../tasks/deploy_and_enable_sandbox_domain_alias_virtualhosts.yml
 
     - name: Enable SSL module for Apache
       become: true

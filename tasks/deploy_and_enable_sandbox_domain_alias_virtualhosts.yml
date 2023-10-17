@@ -15,26 +15,27 @@
 # Online Learning Sandbox. If not, see <https://www.gnu.org/licenses/>.
 
 ##
-# Default values for sandbox variables.
+# Deploy and enable Apache virtual host configuration files.
 #
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
-sandbox_name: Learning Sandbox Online
-sandbox_domain: learningsandbox.online
-sandbox_domain_aliases:
-  - onlinelearningsandbox.com
-sandbox_email: info@learningsandbox.online
-sandbox_github: https://github.com/geoffreyvanwyk/learningsandbox.online
+- name: Deploy Apache virtualhost configuration for sandbox alias
+  become: true
+  loop:
+    - .conf
+    - -ssl.conf
+  ansible.builtin.template:
+    src: "{{ inventory_dir }}/templates/sandbox_domain_alias{{ item }}.j2"
+    dest: /etc/apache2/sites-available/{{ sandbox_domain_alias }}{{ item }}
+    owner: root
+    group: root
+    mode: u=rw,g=r,o=r
 
-sandbox_versions:
-  - branch: MOODLE_39_STABLE
-    version: 3.9
-  - branch: MOODLE_311_STABLE
-    version: 3.11
-  - branch: MOODLE_400_STABLE
-    version: 4.0
-  - branch: MOODLE_401_STABLE
-    version: 4.1
-  - branch: MOODLE_402_STABLE
-    version: 4.2
+- name: Enable Apache virtual host configuration for sandbox alias
+  become: true
+  loop:
+    - .conf
+    - -ssl.conf
+  ansible.builtin.command: a2ensite {{ sandbox_domain_alias }}{{ item }}
+  changed_when: true
