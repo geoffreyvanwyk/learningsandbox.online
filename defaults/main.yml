@@ -22,6 +22,7 @@
 
 sandbox_domain: onlinelearningsandbox.com
 sandbox_email: info@onlinelearningsandbox.com
+sandbox_github: https://github.com/geoffreyvanwyk/learningsandbox.online
 
 sandbox_versions:
   - branch: MOODLE_39_STABLE
