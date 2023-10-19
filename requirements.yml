@@ -21,6 +21,4 @@
 ##
 
 - name: geoffreyvanwyk.moodle
-  src: git+https://github.com/geoffreyvanwyk/ansible-role-moodle.git
-
 - name: geerlingguy.certbot
