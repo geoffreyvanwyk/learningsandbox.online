@@ -1,0 +1,20 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: learningsandboxonline_molecule_${MOLECULE_DISTRO:-ubuntu2204}
+    image: "geoffreyvanwyk/docker-${MOLECULE_DISTRO:-ubuntu2204}-ansible:latest"
+    pre_build_image: true
+    published_ports:
+      - "0.0.0.0:80:80"
+      - "0.0.0.0:443:443"
+provisioner:
+  name: ansible
+  inventory:
+    host_vars:
+      learningsandboxonline_molecule_${MOLECULE_DISTRO:-ubuntu2204}:
+        ansible_user: ubuntu
+verifier:
+  name: ansible

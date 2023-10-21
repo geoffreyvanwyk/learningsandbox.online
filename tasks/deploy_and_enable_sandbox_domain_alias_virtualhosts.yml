@@ -26,7 +26,7 @@
     - .conf
     - -ssl.conf
   ansible.builtin.template:
-    src: "{{ inventory_dir }}/templates/sandbox_domain_alias{{ item }}.j2"
+    src: sandbox_domain_alias{{ item }}.j2
     dest: /etc/apache2/sites-available/{{ sandbox_domain_alias }}{{ item }}
     owner: root
     group: root

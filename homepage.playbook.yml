@@ -24,29 +24,11 @@
   hosts: all
 
   vars_files:
-    - ../defaults/main.yml
+    - defaults/main.yml
 
   tasks:
     - name: Install TLS certificates
-      ansible.builtin.include_role:
-        name: geerlingguy.certbot
-        apply:
-          become: true
-      vars:
-        certbot_create_if_missing: true
-        certbot_create_standalone_stop_services:
-          - apache2
-        certbot_certs:
-          - domains:
-              - "{{ sandbox_domain }}"
-            email: "{{ sandbox_email }}"
-
-          # A bug with the geerlingguy.certbot role is that it if a certificate
-          # exists for the first domain in the list, it will not generate
-          # certificates for the rest of the domains.
-          # See https://github.com/geerlingguy/ansible-role-certbot/issues/187
-          - domains: "{{ sandbox_domain_aliases }}"
-            email: "{{ sandbox_email }}"
+      ansible.builtin.include_tasks: tasks/install_tls_certificates.yml
 
     - name: Deploy Apache virtualhost configuration for sandbox
       become: true
@@ -54,7 +36,7 @@
         - .conf
         - -ssl.conf
       ansible.builtin.template:
-        src: "{{ inventory_dir }}/templates/sandbox_domain{{ item }}.j2"
+        src: sandbox_domain{{ item }}.j2
         dest: /etc/apache2/sites-available/{{ sandbox_domain }}{{ item }}
         owner: root
         group: root
@@ -72,7 +54,7 @@
       loop: "{{ sandbox_domain_aliases }}"
       loop_control:
         loop_var: sandbox_domain_alias
-      ansible.builtin.include_tasks: ../tasks/deploy_and_enable_sandbox_domain_alias_virtualhosts.yml
+      ansible.builtin.include_tasks: tasks/deploy_and_enable_sandbox_domain_alias_virtualhosts.yml
 
     - name: Enable SSL module for Apache
       become: true
@@ -89,7 +71,7 @@
     - name: Deploy home page
       become: true
       ansible.builtin.template:
-        src: "{{ inventory_dir }}/files/index.html"
+        src: index.html
         dest: /var/www/html/index.html
         owner: root
         group: root

@@ -20,6 +20,8 @@
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
+sandbox_environment: production # other values: development
+
 sandbox_name: Learning Sandbox Online
 sandbox_domain: learningsandbox.online
 sandbox_domain_aliases:

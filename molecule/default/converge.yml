@@ -1,0 +1,15 @@
+---
+- name: Default Scenario
+  hosts: all
+  tasks:
+    - name: Override default variables with facts
+      ansible.builtin.set_fact:
+        sandbox_domain: learningsandbox.test
+        sandbox_domain_aliases: []
+        sandbox_environment: development
+        sandbox_versions:
+          - branch: MOODLE_39_STABLE
+            version: 3.9
+
+- name: Import main playbook
+  ansible.builtin.import_playbook: ../../main.playbook.yml

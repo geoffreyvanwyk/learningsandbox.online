@@ -1,0 +1,84 @@
+---
+# This file is part of Online Learning Sandbox.
+#
+# Online Learning Sandbox is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Online Learning Sandbox is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+# Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Online Learning Sandbox. If not, see <https://www.gnu.org/licenses/>.
+
+##
+# Install TLS certificates, using a method appropriate to the environment.
+#
+# @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
+##
+
+- name: Install TLS certificates in production
+  when: sandbox_environment == 'production'
+  ansible.builtin.include_role:
+    name: geerlingguy.certbot
+    apply:
+      become: true
+  vars:
+    certbot_create_if_missing: true
+    certbot_create_standalone_stop_services:
+      - apache2
+    certbot_certs:
+      - domains:
+          - "{{ sandbox_domain }}"
+        email: "{{ sandbox_email }}"
+
+      # A bug with the geerlingguy.certbot role is that if a certificate
+      # exists for the first domain in the list, it will not generate
+      # certificates for the rest of the domains.
+      # See https://github.com/geerlingguy/ansible-role-certbot/issues/187
+      - domains: "{{ sandbox_domain_aliases }}"
+        email: "{{ sandbox_email }}"
+
+- name: Install TLS certificate in development
+  when: sandbox_environment == 'development'
+  block:
+    - name: Install prequisite Python libraries for self-signed certificates
+      ansible.builtin.pip:
+        name:
+          - cryptography
+
+    - name: Create SSL directories
+      become: yes
+      loop:
+        - /etc/ssl/crt/
+        - /etc/ssl/private/
+        - /etc/ssl/csr
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+
+    - name: Generate an OpenSSL private key
+      become: yes
+      community.crypto.openssl_privatekey:
+        path: /etc/ssl/private/{{ sandbox_domain }}.pem
+
+    - name: Generate an OpenSSL Certificate Signing Request
+      become: yes
+      community.crypto.openssl_csr:
+        path: /etc/ssl/csr/{{ sandbox_domain }}.csr
+        privatekey_path: /etc/ssl/private/{{ sandbox_domain }}.pem
+        common_name: "{{ sandbox_domain }}"
+
+    - name: Install self-signed TLS certificates
+      become: yes
+      community.crypto.x509_certificate:
+        path: /etc/ssl/crt/{{ sandbox_domain }}.crt
+        privatekey_path: /etc/ssl/private/{{ sandbox_domain }}.pem
+        csr_path: /etc/ssl/csr/{{ sandbox_domain }}.csr
+        provider: selfsigned

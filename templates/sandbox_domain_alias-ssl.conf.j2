@@ -4,8 +4,13 @@
 
     <IfModule mod_ssl.c>
         SSLEngine On
+        {% if sandbox_environment == 'production' %}
         SSLCertificateFile /etc/letsencrypt/live/{{ sandbox_domain_alias }}/fullchain.pem
         SSLCertificateKeyFile /etc/letsencrypt/live/{{ sandbox_domain_alias }}/privkey.pem
+        {% elif sandbox_environment == 'development' %}
+        SSLCertificateFile /etc/ssl/crt/{{ sandbox_domain_alias }}.crt
+        SSLCertificateKeyFile /etc/ssl/private/{{ sandbox_domain_alias }}.pem
+        {% endif %}
     </IfModule>
 
     ErrorLog ${APACHE_LOG_DIR}/{{ sandbox_domain_alias }}-error.log
