@@ -20,8 +20,17 @@
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
-- name: Set up Homepage
-  ansible.builtin.import_playbook: ./homepage.yml
+- name: Main
+  hosts: all
+  tasks:
+    - name: Update APT package repository
+      become: yes
+      ansible.builtin.apt:
+        update_cache: true
+        cache_valid_time: 3600 # seconds == 1 hour
 
 - name: Install Moodle instances
-  ansible.builtin.import_playbook: ./moodle.yml
+  ansible.builtin.import_playbook: moodle.playbook.yml
+
+- name: Set up Homepage
+  ansible.builtin.import_playbook: homepage.playbook.yml

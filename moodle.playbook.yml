@@ -24,11 +24,11 @@
   hosts: all
 
   vars_files:
-    - ../defaults/main.yml
+    - defaults/main.yml
 
   tasks:
     - name: Install Moodle instances
       loop: "{{ sandbox_versions }}"
       loop_control:
         loop_var: sandbox_item
-      ansible.builtin.include_tasks: ../tasks/install_moodle.yml
+      ansible.builtin.include_tasks: tasks/install_moodle.yml
