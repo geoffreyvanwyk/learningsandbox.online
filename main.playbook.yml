@@ -27,7 +27,7 @@
       become: yes
       ansible.builtin.apt:
         update_cache: true
-        cache_valid_time: 3600 # seconds == 1 hour
+        cache_valid_time: 3600  # seconds == 1 hour
 
 - name: Install Moodle instances
   ansible.builtin.import_playbook: moodle.playbook.yml
