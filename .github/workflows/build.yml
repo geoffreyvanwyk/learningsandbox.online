@@ -1,0 +1,97 @@
+---
+# This file is part of Learning Sandbox Online.
+#
+# Learning Sandbox Online is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Learning Sandbox Online is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+# Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Learning Sandbox Online. If not, see <https://www.gnu.org/licenses/>.
+
+##
+# Continuous integration in GitHub Actions that lints the Ansible code and tests
+# the playbooks with Molecule.
+#
+# @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
+# @see        GitHub Actions {@link https://docs.github.com/en/actions}
+##
+
+name: Build
+"on":
+  pull_request:
+  push:
+    branches:
+      - master
+
+defaults:
+  run:
+    working-directory: "learningsandbox.online"
+
+jobs:
+  yamllint:
+    name: YAML Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install test dependencies.
+        run: pip3 install yamllint
+
+      - name: Lint code.
+        run: yamllint .
+
+  ansile-lint:
+    name: Ansible Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install test dependencies.
+        run: pip3 install ansible-lint
+
+      - name: Lint code.
+        run: ansible-lint .
+
+  molecule:
+    name: Molecule
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+        with:
+          path: "geoffreyvanwyk.moodle"
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install test dependencies.
+        run: pip3 install ansible molecule molecule-plugins[docker] docker
+
+      - name: Run Molecule tests.
+        run: molecule test
+        env:
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
