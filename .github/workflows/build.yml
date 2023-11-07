@@ -29,10 +29,6 @@ name: Build
     branches:
       - master
 
-defaults:
-  run:
-    working-directory: "learningsandbox.online"
-
 jobs:
   yamllint:
     name: YAML Lint
