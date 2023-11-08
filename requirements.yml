@@ -20,5 +20,6 @@
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
+- name: geoffreyvanwyk.php
 - name: geoffreyvanwyk.moodle
 - name: geerlingguy.certbot
