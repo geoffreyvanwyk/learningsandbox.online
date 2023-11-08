@@ -86,6 +86,9 @@ jobs:
       - name: Install test dependencies.
         run: pip3 install ansible molecule molecule-plugins[docker] docker
 
+      - name: Install playbooks dependencies
+        run: ansible-galaxy role install --role-file requirements.yml
+
       - name: Run Molecule tests.
         run: molecule test
         env:
