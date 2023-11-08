@@ -49,6 +49,8 @@
         - "{{ sandbox_domain }}-ssl.conf"
       ansible.builtin.command: a2ensite {{ item }}
       changed_when: true
+      tags:
+        - molecule-idempotence-notest
 
     - name: Deploy and enable Apache virtualhosts for sandbox aliases
       loop: "{{ sandbox_domain_aliases }}"
@@ -67,6 +69,8 @@
       ansible.builtin.sysvinit:
         name: apache2
         state: restarted
+      tags:
+        - molecule-idempotence-notest
 
     - name: Deploy home page
       become: true
