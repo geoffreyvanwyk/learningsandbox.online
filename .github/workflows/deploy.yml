@@ -55,7 +55,7 @@ jobs:
           known_hosts: ${{ secrets.KNOWN_HOSTS }}
 
       - name: Run plays.
-        run: |
+        run: >
           ansible-playbook main.playbook.yml
           --inventory ${{ secrets.ANSIBLE_INVENTORY }},
           --user ${{ secrets.ANSIBLE_USER }}
