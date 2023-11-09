@@ -56,7 +56,7 @@ jobs:
 
       - name: Run plays.
         run: |
-          ansible-playbook main.yml
+          ansible-playbook main.playbook.yml
           --inventory ${{ secrets.ANSIBLE_INVENTORY }},
           --user ${{ secrets.ANSIBLE_USER }}
         env:
