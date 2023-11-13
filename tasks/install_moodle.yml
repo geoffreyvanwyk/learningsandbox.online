@@ -30,3 +30,4 @@
     moodle_web_domain: "{{ sandbox_domain }}"
     moodle_web_path: moodle-{{ sandbox_item.version }}
     moodle_cfg_dbname: moodle-{{ sandbox_item.version | replace(".", "") }}
+    moodle_cfg_disableupdateautodeploy: true
