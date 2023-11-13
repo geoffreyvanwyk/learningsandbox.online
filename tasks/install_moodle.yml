@@ -32,3 +32,4 @@
     moodle_cfg_dbname: moodle-{{ sandbox_item.version | replace(".", "") }}
     moodle_cfg_disableupdateautodeploy: true
     moodle_cfg_noemailever: true
+    moodle_cfg_preventexecpath: true
