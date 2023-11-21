@@ -44,7 +44,7 @@
     path: /var/www/moodledata-fresh-{{ sandbox_moodle_instance }}.tar.gz
   register: moodledata_archive
 
-- name: Prepare for reset of Moodle {{ sandbox_item.version }}
+- name: Prepare for reset of moodledata {{ sandbox_item.version }}
   when: not moodledata_archive.stat.exists
   become: yes
   block:
@@ -89,3 +89,19 @@
         owner: "{{ ansible_user }}"
         group: www-data
         mode: u=rwX,g=rwX,o=rwX
+
+- name: Prepare for reset of database {{ sandbox_item.version }}
+  become: yes
+  become_user: postgres
+  block:
+    - name: Copy fresh database {{ sandbox_item.version }}
+      community.postgresql.postgresql_db:
+        name: moodle-{{ sandbox_item.version | replace(".", "") }}-fresh
+        state: present
+        template: moodle-{{ sandbox_item.version | replace(".", "") }}
+
+    - name: Copy next database {{ sandbox_item.version }}
+      community.postgresql.postgresql_db:
+        name: moodle-{{ sandbox_item.version | replace(".", "") }}-next
+        state: present
+        template: moodle-{{ sandbox_item.version | replace(".", "") }}
