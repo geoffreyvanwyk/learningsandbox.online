@@ -25,6 +25,21 @@
     sandbox_moodle_instance: >-
       {{ sandbox_domain }}-moodle-{{ sandbox_item.version }}
 
+- name: Set PHP version
+  ansible.builtin.set_fact:
+    sandbox_php_version: "{{
+           '8.1' if (sandbox_item.branch == 'MOODLE_402_STABLE') or
+                    (sandbox_item.branch == 'MOODLE_401_STABLE')
+      else '8.0' if (sandbox_item.branch == 'MOODLE_400_STABLE') or
+                    (sandbox_item.branch == 'MOODLE_311_STABLE')
+      else '7.4' }}"
+
+- name: Enable Moodle's maintenance mode {{ sandbox_item.version }}
+  ansible.builtin.command:
+    chdir: /var/www/html/moodle-{{ sandbox_item.version }}
+    cmd: php{{ sandbox_php_version }} admin/cli/maintenance.php --enable
+  changed_when: yes
+
 - name: Rename current moodledata to old {{ sandbox_item.version }}
   become: yes
   ansible.builtin.command:
@@ -93,3 +108,9 @@
     name: moodle-{{ sandbox_item.version | replace(".", "") }}-next
     state: present
     template: moodle-{{ sandbox_item.version | replace(".", "") }}-fresh
+
+- name: Disable Moodle's maintenance mode {{ sandbox_item.version }}
+  ansible.builtin.command:
+    chdir: /var/www/html/moodle-{{ sandbox_item.version }}
+    cmd: php{{ sandbox_php_version }} admin/cli/maintenance.php --disable
+  changed_when: yes
