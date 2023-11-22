@@ -1,5 +1,5 @@
 ---
-- name: Converge
+- name: Side-Effect
   hosts: all
   tasks:
     - name: Override default variables with facts
@@ -11,5 +11,5 @@
           - branch: MOODLE_39_STABLE
             version: 3.9
 
-- name: Import main playbook
-  ansible.builtin.import_playbook: ../../main.playbook.yml
+- name: Import reset playbook
+  ansible.builtin.import_playbook: ../../moodle_reset.playbook.yml

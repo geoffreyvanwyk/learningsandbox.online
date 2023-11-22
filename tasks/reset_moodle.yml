@@ -78,6 +78,7 @@
     dest: /var/www
 
 - name: Set permissions for fresh moodledata {{ sandbox_item.version }}
+  become: yes
   ansible.builtin.file:
     path: /var/www/moodledata-fresh-{{ sandbox_moodle_instance }}
     state: directory
