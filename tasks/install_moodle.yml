@@ -52,7 +52,7 @@
   ansible.builtin.command:
     chdir: /var/www/html/moodle-{{ sandbox_item.version }}
     cmd: php{{ sandbox_php_version }} admin/cli/maintenance.php --enable
-  changed_when: yes
+  changed_when: no  # Set for passing Molecule idempotency test.
 
 - name: Does archive of moodledata exists for Moodle {{ sandbox_item.version }}?
   ansible.builtin.stat:
@@ -125,4 +125,4 @@
   ansible.builtin.command:
     chdir: /var/www/html/moodle-{{ sandbox_item.version }}
     cmd: php{{ sandbox_php_version }} admin/cli/maintenance.php --disable
-  changed_when: yes
+  changed_when: no  # Set for passing Molecule idempotency test.

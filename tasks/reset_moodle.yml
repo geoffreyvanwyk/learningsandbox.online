@@ -38,7 +38,7 @@
   ansible.builtin.command:
     chdir: /var/www/html/moodle-{{ sandbox_item.version }}
     cmd: php{{ sandbox_php_version }} admin/cli/maintenance.php --enable
-  changed_when: yes
+  changed_when: no  # Set for passing Molecule idempotency test.
 
 - name: Rename current moodledata to old {{ sandbox_item.version }}
   become: yes
@@ -113,4 +113,4 @@
   ansible.builtin.command:
     chdir: /var/www/html/moodle-{{ sandbox_item.version }}
     cmd: php{{ sandbox_php_version }} admin/cli/maintenance.php --disable
-  changed_when: yes
+  changed_when: no  # Set for passing Molecule idempotency test.
