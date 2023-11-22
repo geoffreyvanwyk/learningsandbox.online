@@ -1,0 +1,94 @@
+---
+# This file is part of Learning Sandbox Online.
+#
+# Learning Sandbox Online is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Learning Sandbox Online is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+# Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Learning Sandbox Online. If not, see <https://www.gnu.org/licenses/>.
+
+##
+# Tasks for resetting a particular version of Moodle.
+#
+# @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
+##
+
+- name: Set instance identifier for Moodle {{ sandbox_item.version }}
+  ansible.builtin.set_fact:
+    sandbox_moodle_instance: >-
+      {{ sandbox_domain }}-moodle-{{ sandbox_item.version }}
+
+- name: Rename current moodledata to old {{ sandbox_item.version }}
+  become: yes
+  ansible.builtin.command:
+    cmd: >
+      mv /var/www/moodledata-current-{{ sandbox_moodle_instance }}
+        /var/www/moodledata-old-{{ sandbox_moodle_instance }}
+    creates: /var/www/moodledata-old-{{ sandbox_moodle_instance }}
+
+- name: Rename fresh moodledata to current {{ sandbox_item.version }}
+  become: yes
+  ansible.builtin.command:
+    cmd: >
+      mv /var/www/moodledata-fresh-{{ sandbox_moodle_instance }}
+        /var/www/moodledata-current-{{ sandbox_moodle_instance }}
+    creates: /var/www/moodledata-current-{{ sandbox_moodle_instance }}
+
+- name: Rename "current" database to old {{ sandbox_item.version }}
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    name: moodle-{{ sandbox_item.version | replace(".", "") }}
+    state: rename
+    target: moodle-{{ sandbox_item.version | replace(".", "") }}-old
+
+- name: Rename next database to "current" {{ sandbox_item.version }}
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    name: moodle-{{ sandbox_item.version | replace(".", "") }}-next
+    state: rename
+    target: moodle-{{ sandbox_item.version | replace(".", "") }}
+
+- name: Remove old moodledata {{ sandbox_item.version }}
+  become: yes
+  ansible.builtin.file:
+    path: /var/www/moodledata-old-{{ sandbox_moodle_instance }}
+    state: absent
+
+- name: Drop old database {{ sandbox_item.version }}
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    name: moodle-{{ sandbox_item.version | replace(".", "") }}-old
+    state: absent
+
+- name: Extract fresh moodledata  {{ sandbox_item.version }}
+  become: yes
+  ansible.builtin.unarchive:
+    remote_src: yes
+    src: /var/www/moodledata-fresh-{{ sandbox_moodle_instance }}.tar.gz
+    dest: /var/www
+
+- name: Set permissions for fresh moodledata {{ sandbox_item.version }}
+  ansible.builtin.file:
+    path: /var/www/moodledata-fresh-{{ sandbox_moodle_instance }}
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: www-data
+    mode: u=rwX,g=rwX,o=rwX
+
+- name: Copy next database {{ sandbox_item.version }}
+  become: yes
+  become_user: postgres
+  community.postgresql.postgresql_db:
+    name: moodle-{{ sandbox_item.version | replace(".", "") }}-next
+    state: present
+    template: moodle-{{ sandbox_item.version | replace(".", "") }}-fresh
