@@ -86,6 +86,7 @@
         creates: "{{ sandbox_moodledata_current }}"
 
     - name: Rename current database to old [{{ sandbox_item.version }}]
+      become: yes
       become_user: postgres
       community.postgresql.postgresql_db:
         name: "{{ sandbox_database }}"
@@ -93,6 +94,7 @@
         target: "{{ sandbox_database_old }}"
 
     - name: Rename next database to current [{{ sandbox_item.version }}]
+      become: yes
       become_user: postgres
       community.postgresql.postgresql_db:
         name: "{{ sandbox_database_next }}"
@@ -128,12 +130,14 @@
         mode: u=rwX,g=rwX,o=rwX
 
     - name: Drop old database [{{ sandbox_item.version }}]
+      become: yes
       become_user: postgres
       community.postgresql.postgresql_db:
         name: "{{ sandbox_database_old }}"
         state: absent
 
     - name: Copy next database [{{ sandbox_item.version }}]
+      become: yes
       become_user: postgres
       community.postgresql.postgresql_db:
         name: "{{ sandbox_database_next }}"
