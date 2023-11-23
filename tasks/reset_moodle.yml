@@ -15,7 +15,8 @@
 # Learning Sandbox Online. If not, see <https://www.gnu.org/licenses/>.
 
 ##
-# Tasks for resetting a particular version of Moodle.
+# Wrapper tasks for preparing or performing the reset of a particular version of
+# Moodle.
 #
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
@@ -67,143 +68,20 @@
       ansible.builtin.sysvinit:
         name: postgresql
         state: restarted
+      # `changed_when` is actually always `yes` in this case, but it is set to
+      # `no` to pass Molecule's idempotency test. The other option of adding a
+      # tag `molecule-idempotency-notest` would not work, because with that tag
+      # Molecule would skip this task which will make the playbook fail for the
+      # very reason the task is here in the first place.
+      changed_when: no
 
 - name: Does archive of moodledata exists [{{ sandbox_item.version }}]?
   ansible.builtin.stat:
     path: "{{ sandbox_moodledata_archive }}"
   register: sandbox_stat_moodledata_archive
 
-- name: Reset Moodle [{{ sandbox_item.version }}]
-  when: sandbox_stat_moodledata_archive.stat.exists
-  become: yes
-  block:
-    - name: Rename current moodledata to old [{{ sandbox_item.version }}]
-      ansible.builtin.command:
-        cmd: mv {{ sandbox_moodledata_current }} {{ sandbox_moodledata_old }}
-        creates: "{{ sandbox_moodledata_old }}"
-
-    - name: Rename fresh moodledata to current [{{ sandbox_item.version }}]
-      ansible.builtin.command:
-        cmd: mv {{ sandbox_moodledata_fresh }} {{ sandbox_moodledata_current }}
-        creates: "{{ sandbox_moodledata_current }}"
-
-    - name: Rename current database to old [{{ sandbox_item.version }}]
-      become: yes
-      become_user: postgres
-      community.postgresql.postgresql_db:
-        name: "{{ sandbox_database }}"
-        state: rename
-        target: "{{ sandbox_database_old }}"
-
-    - name: Rename next database to current [{{ sandbox_item.version }}]
-      become: yes
-      become_user: postgres
-      community.postgresql.postgresql_db:
-        name: "{{ sandbox_database_next }}"
-        state: rename
-        target: "{{ sandbox_database }}"
-
-- name: Has Moodle been reset [{{ sandbox_item.version }}]?
-  ansible.builtin.stat:
-    path: "{{ sandbox_moodledata_old }}"
-  register: sandbox_stat_moodledata_old
-
-- name: Prepare for next reset [{{ sandbox_item.version }}]
-  when: sandbox_stat_moodledata_old.stat.exists
-  become: yes
-  block:
-    - name: Remove old moodledata [{{ sandbox_item.version }}]
-      ansible.builtin.file:
-        path: "{{ sandbox_moodledata_old }}"
-        state: absent
-
-    - name: Extract fresh moodledata [{{ sandbox_item.version }}]
-      ansible.builtin.unarchive:
-        remote_src: yes
-        src: "{{ sandbox_moodledata_archive }}"
-        dest: /var/www
-
-    - name: Set permissions for fresh moodledata [{{ sandbox_item.version }}]
-      ansible.builtin.file:
-        path: "{{ sandbox_moodledata_fresh }}"
-        state: directory
-        owner: "{{ ansible_user }}"
-        group: www-data
-        mode: u=rwX,g=rwX,o=rwX
-
-    - name: Drop old database [{{ sandbox_item.version }}]
-      become: yes
-      become_user: postgres
-      community.postgresql.postgresql_db:
-        name: "{{ sandbox_database_old }}"
-        state: absent
-
-    - name: Copy next database [{{ sandbox_item.version }}]
-      become: yes
-      become_user: postgres
-      community.postgresql.postgresql_db:
-        name: "{{ sandbox_database_next }}"
-        state: present
-        template: "{{ sandbox_database_fresh }}"
-
-- name: Initialize moodledata for reset [{{ sandbox_item.version }}]
-  when: not sandbox_stat_moodledata_archive.stat.exists
-  become: yes
-  block:
-    - name: Rename moodledata as fresh [{{ sandbox_item.version }}]
-      ansible.builtin.command:
-        cmd: mv {{ sandbox_moodledata }} {{ sandbox_moodledata_fresh }}
-        creates: "{{ sandbox_moodledata_fresh }}"
-
-    - name: Archive fresh moodledata [{{ sandbox_item.version }}]
-      community.general.archive:
-        path: "{{ sandbox_moodledata_fresh }}"
-        dest: "{{ sandbox_moodledata_archive }}"
-        owner: "{{ ansible_user }}"
-        group: "{{ ansible_user }}"
-        mode: u=rw,g=r,o=r
-
-    - name: Rename fresh moodledata to current [{{ sandbox_item.version }}]
-      ansible.builtin.command:
-        cmd: mv {{ sandbox_moodledata_fresh }} {{ sandbox_moodledata_current }}
-        creates: "{{ sandbox_moodledata_current }}"
-
-    - name: Turn moodledata into link [{{ sandbox_item.version }}]
-      ansible.builtin.file:
-        src: "{{ sandbox_moodledata_current }}"
-        dest: "{{ sandbox_moodledata }}"
-        state: link
-
-    - name: Extract fresh moodledata [{{ sandbox_item.version }}]
-      ansible.builtin.unarchive:
-        remote_src: yes
-        src: "{{ sandbox_moodledata_archive }}"
-        dest: /var/www
-
-    - name: Set permissions for fresh moodledata [{{ sandbox_item.version }}]
-      ansible.builtin.file:
-        path: "{{ sandbox_moodledata_fresh }}"
-        state: directory
-        owner: "{{ ansible_user }}"
-        group: www-data
-        mode: u=rwX,g=rwX,o=rwX
-
-- name: Initialize database for reset [{{ sandbox_item.version }}]
-  when: not sandbox_stat_moodledata_archive.stat.exists
-  become: yes
-  become_user: postgres
-  block:
-    - name: Copy fresh database [{{ sandbox_item.version }}]
-      community.postgresql.postgresql_db:
-        name: "{{ sandbox_database_fresh }}"
-        state: present
-        template: "{{ sandbox_database }}"
-
-    - name: Copy next database [{{ sandbox_item.version }}]
-      community.postgresql.postgresql_db:
-        name: "{{ sandbox_database_next }}"
-        state: present
-        template: "{{ sandbox_database_fresh }}"
+- name: Prepare or perform reset [{{ sandbox_item.version }}]
+  ansible.builtin.include_tasks: "{{ sandbox_reset_step }}_moodle_reset.yml"
 
 - name: Disable Moodle's maintenance mode {{ sandbox_item.version }}
   ansible.builtin.command:
