@@ -1,0 +1,94 @@
+---
+# This file is part of Learning Sandbox Online.
+#
+# Learning Sandbox Online is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Learning Sandbox Online is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+# Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Learning Sandbox Online. If not, see <https://www.gnu.org/licenses/>.
+
+##
+# Tasks for performing the reset of a particular version of Moodle.
+#
+# @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
+##
+
+- name: Reset Moodle [{{ sandbox_item.version }}]
+  when: sandbox_stat_moodledata_archive.stat.exists
+  become: yes
+  block:
+    - name: Rename current moodledata to old [{{ sandbox_item.version }}]
+      ansible.builtin.command:
+        cmd: mv {{ sandbox_moodledata_current }} {{ sandbox_moodledata_old }}
+        creates: "{{ sandbox_moodledata_old }}"
+
+    - name: Rename fresh moodledata to current [{{ sandbox_item.version }}]
+      ansible.builtin.command:
+        cmd: mv {{ sandbox_moodledata_fresh }} {{ sandbox_moodledata_current }}
+        creates: "{{ sandbox_moodledata_current }}"
+
+    - name: Rename current database to old [{{ sandbox_item.version }}]
+      become: yes
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: "{{ sandbox_database }}"
+        state: rename
+        target: "{{ sandbox_database_old }}"
+
+    - name: Rename next database to current [{{ sandbox_item.version }}]
+      become: yes
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: "{{ sandbox_database_next }}"
+        state: rename
+        target: "{{ sandbox_database }}"
+
+- name: Has Moodle been reset [{{ sandbox_item.version }}]?
+  ansible.builtin.stat:
+    path: "{{ sandbox_moodledata_old }}"
+  register: sandbox_stat_moodledata_old
+
+- name: Prepare for next reset [{{ sandbox_item.version }}]
+  when: sandbox_stat_moodledata_old.stat.exists
+  become: yes
+  block:
+    - name: Remove old moodledata [{{ sandbox_item.version }}]
+      ansible.builtin.file:
+        path: "{{ sandbox_moodledata_old }}"
+        state: absent
+
+    - name: Extract fresh moodledata [{{ sandbox_item.version }}]
+      ansible.builtin.unarchive:
+        remote_src: yes
+        src: "{{ sandbox_moodledata_archive }}"
+        dest: /var/www
+
+    - name: Set permissions for fresh moodledata [{{ sandbox_item.version }}]
+      ansible.builtin.file:
+        path: "{{ sandbox_moodledata_fresh }}"
+        state: directory
+        owner: "{{ ansible_user }}"
+        group: www-data
+        mode: u=rwX,g=rwX,o=rwX
+
+    - name: Drop old database [{{ sandbox_item.version }}]
+      become: yes
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: "{{ sandbox_database_old }}"
+        state: absent
+
+    - name: Copy next database [{{ sandbox_item.version }}]
+      become: yes
+      become_user: postgres
+      community.postgresql.postgresql_db:
+        name: "{{ sandbox_database_next }}"
+        state: present
+        template: "{{ sandbox_database_fresh }}"

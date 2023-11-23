@@ -20,7 +20,7 @@
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
-- name: Reset Moodle instances
+- name: Moodle Reset
   hosts: all
 
   vars_files:
@@ -28,6 +28,8 @@
 
   tasks:
     - name: Reset Moodle instances
+      vars:
+        sandbox_reset_step: perform
       loop: "{{ sandbox_versions }}"
       loop_control:
         loop_var: sandbox_item

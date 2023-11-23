@@ -32,3 +32,11 @@
       loop_control:
         loop_var: sandbox_item
       ansible.builtin.include_tasks: tasks/install_moodle.yml
+
+    - name: Prepare Moodle instances for reset
+      vars:
+        sandbox_reset_step: prepare
+      loop: "{{ sandbox_versions }}"
+      loop_control:
+        loop_var: sandbox_item
+      ansible.builtin.include_tasks: tasks/reset_moodle.yml
