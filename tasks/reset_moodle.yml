@@ -25,9 +25,8 @@
     sandbox_database: >-
       moodle-{{ sandbox_item.version | replace('.', '') }}
     sandbox_moodle_html: /var/www/html/moodle-{{ sandbox_item.version }}
-    sandbox_moodle_instance: >-
-      {{ sandbox_domain }}-moodle-{{ sandbox_item.version }}
-    sandbox_moodledata: /var/www/moodledata-{{ sandbox_moodle_instance }}
+    sandbox_moodledata: >-
+      /var/www/moodledata-{{ sandbox_domain }}-moodle-{{ sandbox_item.version }}
     sandbox_php_version: "{{
            '8.1' if (sandbox_item.branch == 'MOODLE_402_STABLE') or
                     (sandbox_item.branch == 'MOODLE_401_STABLE')
@@ -41,7 +40,7 @@
     sandbox_database_next: "{{ sandbox_database }}-next"
     sandbox_database_old: "{{ sandbox_database }}-old"
     sandbox_moodledata_fresh: "{{ sandbox_moodledata }}-fresh"
-    sandbox_moodledata_archive: "{{ sandbox_moodledata_fresh }}.tar.gz"
+    sandbox_moodledata_archive: "{{ sandbox_moodledata }}-fresh.tar.gz"
     sandbox_moodledata_current: "{{ sandbox_moodledata }}-current"
     sandbox_moodledata_old: "{{ sandbox_moodledata }}-old"
 
