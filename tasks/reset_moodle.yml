@@ -68,6 +68,12 @@
       ansible.builtin.sysvinit:
         name: postgresql
         state: restarted
+      # `changed_when` is actually always `yes` in this case, but it is set to
+      # `no` to pass Molecule's idempotency test. The other option of adding a
+      # tag `molecule-idempotency-notest` would not work, because with that tag
+      # Molecule would skip this task which will make the playbook fail for the
+      # very reason the task is here in the first place.
+      changed_when: no
 
 - name: Does archive of moodledata exists [{{ sandbox_item.version }}]?
   ansible.builtin.stat:
