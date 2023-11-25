@@ -1,0 +1,33 @@
+<script>
+    window.onload = () => {
+        let sandboxCountdown = document.createElement("div");
+        document.getElementById("page-footer").appendChild(sandboxCountdown);
+        sandboxCountdown.textContent = "";
+        sandboxCountdown.style.cssText = "z-index:99999999;position:fixed;bottom:0rem;right:1rem;padding:1px 0.5rem;";
+        setInterval(() => {
+            let now = Math.floor(new Date().getTime() / 1000); // seconds since epoch
+            let nextWholeHour = now - (now % 3600) + 3600; // seconds since epoch until next top of the hour
+            let remainingSeconds = nextWholeHour - now;
+            remainingSeconds = remainingSeconds < 1800
+                ? remainingSeconds + 1800
+                : remainingSeconds - 1800
+
+            let hours = Math.floor(remainingSeconds / 3600);
+            let minutes = Math.floor((remainingSeconds % 3600) / 60);
+            let seconds = Math.floor((remainingSeconds % 3600) % 60);
+
+            let text = "Moodle will be reset in ";
+            if (hours > 0) {
+                text += ("0" + hours).slice(-2) + " hours ";
+            }
+            text += ("0" + minutes).slice(-2) + " minutes " + ("0" + seconds).slice(-2) + " seconds";
+            sandboxCountdown.textContent = text;
+
+            if (remainingSeconds < 300) {
+                sandboxCountdown.style.cssText += "background-color:red;color:white;font-weight:bold";
+            } else {
+                sandboxCountdown.style.cssText += "background-color:green;color:white;font-weight:normal";
+            }
+        }, 1000);
+    }
+</script>
