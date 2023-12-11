@@ -1785,13 +1785,16 @@ html{
   z-index: 3;
   opacity: 1;
 }
-.badge-ghost{
-  --tw-border-opacity: 1;
-  border-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-border-opacity)));
+.badge-warning{
+  border-color: transparent;
   --tw-bg-opacity: 1;
-  background-color: var(--fallback-b2,oklch(var(--b2)/var(--tw-bg-opacity)));
+  background-color: var(--fallback-wa,oklch(var(--wa)/var(--tw-bg-opacity)));
   --tw-text-opacity: 1;
-  color: var(--fallback-bc,oklch(var(--bc)/var(--tw-text-opacity)));
+  color: var(--fallback-wac,oklch(var(--wac)/var(--tw-text-opacity)));
+}
+.badge-outline.badge-warning{
+  --tw-text-opacity: 1;
+  color: var(--fallback-wa,oklch(var(--wa)/var(--tw-text-opacity)));
 }
 .btm-nav > *:where(.active){
   border-top-width: 2px;
@@ -2824,6 +2827,10 @@ html{
 }
 .border-transparent{
   border-color: transparent;
+}
+.border-warning{
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-wa,oklch(var(--wa)/var(--tw-border-opacity)));
 }
 .border-yellow-400{
   --tw-border-opacity: 1;

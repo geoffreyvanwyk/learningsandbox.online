@@ -27,10 +27,10 @@
             versions, find out what is new.
           </p>
           <div class="flex space-x-6">
-            <a class="btn btn-outline btn-wide mb-2 rounded-full text-lg text-neutral-content"
+            <a class="btn btn-outline btn-wide mb-2 rounded-full border-warning text-lg text-neutral-content"
                href="/moodle-{{ config('hyde.moodle.versions')->first() }}">
               Try newest
-              <span class="badge badge-ghost">{{ config('hyde.moodle.versions')->first() }}</span>
+              <span class="badge badge-warning">{{ config('hyde.moodle.versions')->first() }}</span>
               <i class="fas fa-arrow-right text-xl"></i>
             </a>
             <div>
