@@ -38,7 +38,7 @@ return [
     |
     */
 
-    'name' => env('SITE_NAME', 'HydePHP'),
+    'name' => env('SITE_NAME', 'Learning Sandbox Online'),
 
     /*
     |--------------------------------------------------------------------------
@@ -455,4 +455,17 @@ return [
     'hydefront_version' => \Hyde\Framework\Services\AssetService::HYDEFRONT_VERSION,
     'hydefront_cdn_url' => \Hyde\Framework\Services\AssetService::HYDEFRONT_CDN_URL,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Moodle Versions
+    |--------------------------------------------------------------------------
+    |
+    | This value sets the name of your site and is, for example, used in
+    | the compiled page titles and more. The default value is HydePHP.
+    |
+    */
+
+    'moodle' => [
+        'versions' => collect(explode(',', env('MOODLE_VERSIONS', '4.2,4.1,4.0,3.11,3.9'))),
+    ],
 ];
