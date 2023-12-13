@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="{{ config('hyde.language', 'en') }}">
+<html data-theme="halloween"
+      lang="{{ config('hyde.language', 'en') }}">
 
 <head>
   @include('hyde::layouts.head')
