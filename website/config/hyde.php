@@ -244,7 +244,7 @@ return [
         Features::documentationPages(),
 
         // Frontend Features
-        Features::darkmode(),
+        // Features::darkmode(),
         Features::documentationSearch(),
 
         // Integrations
