@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html data-theme="halloween"
+      lang="en">
+
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Learning Sandbox Online - Index</title>
 
@@ -22,7 +24,7 @@
 <style>[x-cloak] {display: none!important}</style>
 
 
-    <link rel="stylesheet" href="media/app.css?v=adb6a9b00a57deef41b458e003711277">
+    <link rel="stylesheet" href="media/app.css?v=c16d32a898bf062ac9a4165cb8926d0b">
 
 
 
@@ -34,8 +36,12 @@
     <meta id="meta-color-scheme" name="color-scheme" content="light">
     <script>if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) { document.documentElement.classList.add('dark'); document.getElementById('meta-color-scheme').setAttribute('content', 'dark');} else { document.documentElement.classList.remove('dark') } </script>
 </head>
-<body id="app" class="flex flex-col min-h-screen overflow-x-hidden dark:bg-gray-900 dark:text-white" x-data="{ navigationOpen: false }" x-on:keydown.escape="navigationOpen = false;">
-    <a href="#content" id="skip-to-content" class="sr-only focus:not-sr-only bg-black border-4 border-yellow-400 focus:absolute focus:mt-2 focus:mx-auto focus:p-2 focus:w-64 h-auto left-0 overflow-auto right-0 rounded-md text-center text-lg text-white top-auto z-50 ">Skip to content</a>    <nav aria-label="Main navigation" id="main-navigation" class="flex flex-wrap items-center justify-between p-4 shadow-lg sm:shadow-xl md:shadow-none dark:bg-gray-800">
+
+<body class="flex min-h-screen flex-col overflow-x-hidden dark:bg-gray-900 dark:text-white"
+      id="app"
+      x-data="{ navigationOpen: false }"
+      x-on:keydown.escape="navigationOpen = false;">
+  <a href="#content" id="skip-to-content" class="sr-only focus:not-sr-only bg-black border-4 border-yellow-400 focus:absolute focus:mt-2 focus:mx-auto focus:p-2 focus:w-64 h-auto left-0 overflow-auto right-0 rounded-md text-center text-lg text-white top-auto z-50 ">Skip to content</a>  <nav aria-label="Main navigation" id="main-navigation" class="flex flex-wrap items-center justify-between p-4 shadow-lg sm:shadow-xl md:shadow-none dark:bg-gray-800">
     <div class="flex flex-grow items-center flex-shrink-0 text-gray-700 dark:text-gray-200">
         <a href="index.html" class="font-bold px-4" aria-label="Home page">
     Learning Sandbox Online
@@ -76,8 +82,8 @@
                     </ul>
     </div>
 </nav>
-    <section>
-          <main id="content">
+  <section>
+      <main id="content">
     <div class="hero min-h-screen bg-base-200"
          style="background-image: url('/media/hero_background.jpg')">
       <div class="hero-overlay bg-opacity-60"></div>
@@ -91,41 +97,64 @@
             An installation of each supported version of the open source
             learning management system Moodle, the
             <span class="font-bold">M</span>odular
-            <span class="font-bold">O</span>bject-
-            <span class="font-bold">O</span>riented
+            <span class="font-bold">O</span>bject-<span class="font-bold">O</span>riented
             <span class="font-bold">D</span>ynamic
             <span class="font-bold">L</span>earning
             <span class="font-bold">E</span>nvironment.
             See how it looks, learn how it works, compare features between
             versions, find out what is new.
           </p>
-          <div class="flex space-x-6">
-            <a class="btn btn-outline btn-wide mb-2 rounded-full border-warning text-lg text-neutral-content"
-               href="/moodle-4.2">
-              Try newest
-              <span class="badge badge-warning">4.2</span>
-              <i class="fas fa-arrow-right text-xl"></i>
-            </a>
-            <div>
-              Other versions:
-              <div class="join">
-                                  <a class="btn btn-outline join-item rounded-full text-neutral-content"
-                     href="/moodle-4.1">4.1</a>
-                                  <a class="btn btn-outline join-item rounded-full text-neutral-content"
-                     href="/moodle-4.0">4.0</a>
-                                  <a class="btn btn-outline join-item rounded-full text-neutral-content"
-                     href="/moodle-3.11">3.11</a>
-                                  <a class="btn btn-outline join-item rounded-full text-neutral-content"
-                     href="/moodle-3.9">3.9</a>
-                              </div>
-            </div>
-        </section>
+                      <div class="flex items-center space-x-6">
+              <a class="btn btn-outline btn-wide mb-2 rounded-full border-2 border-primary text-lg text-neutral-content"
+                 href="/moodle-4.2">
+                Try newest
+                <span class="badge badge-primary">4.2</span>
+                <i class="fas fa-arrow-right text-xl"></i>
+              </a>
+
+                              <div class="divider divider-primary divider-horizontal h-20 font-bold text-neutral-content">OR</div>
+
+                <details class="dropdown">
+                  <summary class="btn btn-secondary btn-wide m-1 rounded-full">Other versions</summary>
+                  <ul class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
+                                          <li>
+                        <a href="/moodle-4.1">
+                          Try version
+                          <span class="badge badge-secondary">4.1</span>
+                          <i class="fas fa-arrow-right text-xl"></i>
+                        </a>
+                      </li>
+                                          <li>
+                        <a href="/moodle-4.0">
+                          Try version
+                          <span class="badge badge-secondary">4.0</span>
+                          <i class="fas fa-arrow-right text-xl"></i>
+                        </a>
+                      </li>
+                                          <li>
+                        <a href="/moodle-3.11">
+                          Try version
+                          <span class="badge badge-secondary">3.11</span>
+                          <i class="fas fa-arrow-right text-xl"></i>
+                        </a>
+                      </li>
+                                          <li>
+                        <a href="/moodle-3.9">
+                          Try version
+                          <span class="badge badge-secondary">3.9</span>
+                          <i class="fas fa-arrow-right text-xl"></i>
+                        </a>
+                      </li>
+                                      </ul>
+                </details>
+                          </div>
+                  </section>
       </div>
     </div>
   </main>
-    </section>
+  </section>
 
-    <footer aria-label="Page footer" class="flex py-4 px-6 w-full text-center mt-auto bg-slate-100 dark:bg-gray-800">
+  <footer aria-label="Page footer" class="flex py-4 px-6 w-full text-center mt-auto bg-slate-100 dark:bg-gray-800">
         <div class="prose dark:prose-invert text-center mx-auto">
             <p>Site proudly built with <a href="https://github.com/hydephp/hyde">HydePHP</a> 🎩</p>
 
@@ -140,7 +169,7 @@
         </a>
     </footer>
 
-    <script defer src="media/app.js?v=35a48915c2caaaaef4cb8b1d23b75078"></script>
+  <script defer src="media/app.js?v=35a48915c2caaaaef4cb8b1d23b75078"></script>
 
 
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.10.3/dist/cdn.min.js" integrity="sha256-gOkV4d9/FmMNEkjOzVlyM2eNAWSUXisT+1RbMTTIgXI=" crossorigin="anonymous"></script>
@@ -161,4 +190,5 @@
 
 
 </body>
+
 </html>
