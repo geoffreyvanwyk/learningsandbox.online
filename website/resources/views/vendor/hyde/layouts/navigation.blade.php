@@ -2,10 +2,10 @@
   $navigation = \Hyde\Framework\Features\Navigation\NavigationMenu::create();
 @endphp
 
-<nav class="flex flex-wrap items-center justify-between p-4 shadow-lg dark:bg-gray-800 sm:shadow-xl md:shadow-none"
+<nav class="flex flex-wrap items-center justify-between bg-gray-800 p-4 shadow-lg sm:shadow-xl md:shadow-none"
      id="main-navigation"
      aria-label="Main navigation">
-  <div class="flex flex-shrink-0 flex-grow items-center text-gray-700 dark:text-gray-200">
+  <div class="flex flex-shrink-0 flex-grow items-center text-gray-200">
     @include('hyde::components.navigation.navigation-brand')
 
     <div class="ml-auto">
@@ -14,11 +14,11 @@
   </div>
 
   <div class="block md:hidden">
-    <button class="flex items-center px-3 py-1 hover:text-gray-700 dark:text-gray-200"
+    <button class="flex items-center px-3 py-1 text-gray-200 hover:text-gray-700"
             id="navigation-toggle-button"
             aria-label="Toggle navigation menu"
             @click="navigationOpen = ! navigationOpen">
-      <svg class="dark:fill-gray-200"
+      <svg class="fill-gray-200"
            id="open-main-navigation-menu-icon"
            x-show="! navigationOpen"
            title="Open Navigation Menu"
@@ -32,7 +32,7 @@
               fill="none" />
         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
       </svg>
-      <svg class="dark:fill-gray-200"
+      <svg class="fill-gray-200"
            id="close-main-navigation-menu-icon"
            x-show="navigationOpen"
            title="Close Navigation Menu"
@@ -50,7 +50,7 @@
     </button>
   </div>
 
-  <div class="x-uncloak-md -mx-4 mt-3 w-full flex-grow border-t border-gray-200 px-6 pt-3 dark:border-gray-700 md:mt-0 md:flex md:w-auto md:flex-grow-0 md:items-center md:border-none md:py-0"
+  <div class="x-uncloak-md -mx-4 mt-3 w-full flex-grow border-t border-gray-700 px-6 pt-3 md:mt-0 md:flex md:w-auto md:flex-grow-0 md:items-center md:border-none md:py-0"
        id="main-navigation-links"
        :class="navigationOpen ? '' : 'hidden'"
        x-cloak>
