@@ -1,6 +1,17 @@
 @php
   $informationCards = collect([
       [
+          'title' => 'Credentials',
+          'icon' => 'user-lock',
+          'description' => '
+                Log in as the site administration with:
+                <ul>
+                    <li class="flex justify-between"><span class="font-bold"><i class="las la-user"></i> Username</span> <span>moodler</span></li>
+                    <li class="flex justify-between"><span class="font-bold"><i class="las la-lock"></i> Password</span> <span>N3verstople@rning</span></li>
+                </ul>
+          ',
+      ],
+      [
           'title' => 'Disclaimer',
           'icon' => 'exclamation-circle',
           'description' => 'Learning Sandbox Online is not affiliated with <a href="https://moodle.com">Moodle HQ</a>',
@@ -9,7 +20,7 @@
           'title' => 'Automatic Reset',
           'icon' => 'hourglass-half',
           'description' => 'Every hour, at 30 minutes past the hour, each Moodle instance is reset to default content and
-          configuration.',
+                configuration.',
       ],
       [
           'title' => 'Additional Plugins',
