@@ -5,7 +5,7 @@
     <div class="hero bg-base-200"
          style="background-image: url('/media/hero_background.jpg')">
       <div class="hero-overlay bg-opacity-60"></div>
-      <div class="hero-content text-neutral-content">
+      <div class="hero-content text-neutral-content md:py-10">
         <section>
           <h1
               class="flex flex-col items-center justify-center space-x-3 text-3xl font-bold md:flex-row md:justify-start md:text-5xl">
