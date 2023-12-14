@@ -2,7 +2,7 @@
   $author = collect(config('hyde.authors'))->first();
 @endphp
 @if (config('hyde.footer') !== false)
-  <footer class="mt-auto flex w-full justify-between bg-gray-800 px-6 py-4"
+  <footer class="mt-auto flex w-full flex-col justify-between bg-gray-800 px-6 py-4 md:flex-row"
           aria-label="Page footer">
     <p class="prose-invert">
       &copy; {{ now()->year }}
@@ -11,7 +11,7 @@
       @endif
     </p>
 
-    <div class="prose-invert text-center">
+    <div class="prose-invert">
       {!! \Hyde\Support\Includes::markdown(
           'footer',
           config('hyde.footer', 'Site proudly built with [HydePHP](https://github.com/hydephp/hyde) 🎩'),

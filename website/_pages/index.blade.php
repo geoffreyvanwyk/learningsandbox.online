@@ -5,7 +5,8 @@
 @endpush
 @section('content')
   <main id="content">
-    <div class="hero min-h-screen bg-base-200"
+    <!-- Primary Hero -->
+    <div class="hero bg-base-200"
          style="background-image: url('/media/hero_background.jpg')">
       <div class="hero-overlay bg-opacity-60"></div>
       <div class="hero-content text-neutral-content">
@@ -60,6 +61,42 @@
           @endif
         </section>
       </div>
-    </div>
+    </div> <!-- End Primary Hero -->
+
+    <!-- Secondary Hero -->
+    <div class="prose-invert hero">
+      <div class="hero-content grid w-full grid-cols-1 items-start bg-base-200 md:grid-cols-3">
+
+        <div class="card border shadow-lg">
+          <div class="card-body">
+            <h2 class="card-title"><i class="fas fa-exclamation-circle"></i> Disclaimer</h2>
+            <p>Learning Sandbox Online is not affiliated with <a href="https://moodle.com">Moodle HQ</a></p>
+          </div>
+        </div>
+
+        <div class="card border shadow-lg">
+          <div class="card-body">
+            <h2 class="card-title"><i class="fas fa-hourglass-half"></i> Automatic Reset</h2>
+            <p>Every hour, at 30 minutes past the hour, each Moodle instance is reset to default content and
+              configuration.</p>
+          </div>
+        </div>
+
+        <div class="card border shadow-lg">
+          <div class="card-body">
+            <h2 class="card-title"><i class="fas fa-puzzle-piece"></i> Additional Plugins</h2>
+            <p>The installation of additional plugins are disabled in order to make the automatic upgrade possible.</p>
+          </div>
+        </div>
+
+        <div class="card border shadow-lg">
+          <div class="card-body">
+            <h2 class="card-title"><i class="fas fa-envelope"></i> Emails</h2>
+            <p>The sending of email messages is disabled to prevent spam.</p>
+          </div>
+        </div>
+
+      </div>
+    </div> <!-- End Secondary Hero -->
   </main>
 @endsection
