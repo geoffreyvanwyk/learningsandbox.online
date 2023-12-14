@@ -2,23 +2,29 @@
   $author = collect(config('hyde.authors'))->first();
 @endphp
 @if (config('hyde.footer') !== false)
-  <footer class="mt-auto flex w-full justify-between bg-gray-800 px-6 py-4 text-center"
+  <footer class="mt-auto flex w-full justify-between bg-gray-800 px-6 py-4"
           aria-label="Page footer">
-    <div>
+    <p class="prose-invert">
       &copy; {{ now()->year }}
       @if ($author)
-        <a class="underline"
-           href="{{ $author->website }}">{{ $author->name }}</a>
+        <a href="{{ $author->website }}">{{ $author->name }}</a>
       @endif
-    </div>
-    <div class="prose-invert mx-auto text-center">
+    </p>
+
+    <div class="prose-invert text-center">
       {!! \Hyde\Support\Includes::markdown(
           'footer',
           config('hyde.footer', 'Site proudly built with [HydePHP](https://github.com/hydephp/hyde) 🎩'),
       ) !!}
     </div>
-    <a class="float-right"
-       href="#app"
+
+    <a
+       href="https://www.digitalocean.com/?refcode=0fbd041b9aad&utm_campaign=Referral_Invite&utm_medium=Referral_Program&utm_source=badge">
+      <img src="https://web-platforms.sfo2.cdn.digitaloceanspaces.com/WWW/Badge%202.svg"
+           alt="DigitalOcean Referral Badge" />
+    </a>
+
+    <a href="#app"
        aria-label="Go to top of page">
       <button title="Scroll to top">
         <svg class="h-6 w-6 fill-current text-gray-500"

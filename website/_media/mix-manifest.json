@@ -1,4 +1,9 @@
 {
     "/app.js": "/app.js",
-    "/app.css": "/app.css"
+    "/app.css": "/app.css",
+    "/_media/app.css": "/_media/app.css",
+    "/_media/app.js": "/_media/app.js",
+    "/_media/hero_background.jpg": "/_media/hero_background.jpg",
+    "/_media/mix-manifest.json": "/_media/mix-manifest.json",
+    "/_media/moodle_logo.svg": "/_media/moodle_logo.svg"
 }
