@@ -25,6 +25,7 @@
 use Hyde\Facades\Author;
 use Hyde\Facades\Features;
 use Hyde\Facades\Meta;
+use Hyde\Framework\Features\Navigation\NavItem;
 
 return [
 
@@ -329,7 +330,7 @@ return [
         // To get started quickly, you can uncomment the defaults here.
         // See the documentation link above for more information.
         'custom' => [
-            // NavItem::forLink('https://github.com/hydephp/hyde', 'GitHub', 200),
+            NavItem::forLink('https://github.com/geoffreyvanwyk/learningsandbox.online', 'GitHub', 200),
         ],
 
         // How should pages in subdirectories be displayed in the menu?
