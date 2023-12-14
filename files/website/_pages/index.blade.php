@@ -61,7 +61,7 @@
 
     <!-- Secondary Hero -->
     <div class="prose-invert hero">
-      <div class="hero-content grid w-full grid-cols-1 items-start bg-base-200 md:grid-cols-3">
+      <div class="hero-content -z-50 grid w-full grid-cols-1 items-start bg-base-200 md:grid-cols-3">
 
         <div class="card h-full border shadow-lg">
           <div class="card-body">
