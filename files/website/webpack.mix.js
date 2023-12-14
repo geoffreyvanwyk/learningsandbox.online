@@ -9,4 +9,5 @@ mix.js('resources/assets/app.js', 'app.js')
         require('tailwindcss'),
         require('autoprefixer'),
     ]).setPublicPath('_media')
-    .copyDirectory('_media', '_site/media')
+    .copy('_media/!(fonts/*)', '_site/media')
+    .copyDirectory('_media/fonts', '_site/fonts')
