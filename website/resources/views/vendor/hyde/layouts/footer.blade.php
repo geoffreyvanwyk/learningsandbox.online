@@ -1,6 +1,16 @@
+@php
+  $author = collect(config('hyde.authors'))->first();
+@endphp
 @if (config('hyde.footer') !== false)
-  <footer class="mt-auto flex w-full bg-gray-800 px-6 py-4 text-center"
+  <footer class="mt-auto flex w-full justify-between bg-gray-800 px-6 py-4 text-center"
           aria-label="Page footer">
+    <div>
+      &copy; {{ now()->year }}
+      @if ($author)
+        <a class="underline"
+           href="{{ $author->website }}">{{ $author->name }}</a>
+      @endif
+    </div>
     <div class="prose-invert mx-auto text-center">
       {!! \Hyde\Support\Includes::markdown(
           'footer',

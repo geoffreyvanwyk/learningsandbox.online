@@ -216,12 +216,12 @@ return [
     */
 
     'meta' => [
-        // Meta::name('author', 'Mr. Hyde'),
+        Meta::name('author', 'Geoffrey van Wyk'),
         // Meta::name('twitter:creator', '@HydeFramework'),
         // Meta::name('description', 'My Hyde Blog'),
         // Meta::name('keywords', 'Static Sites, Blogs, Documentation'),
         Meta::name('generator', 'HydePHP v'.Hyde\Hyde::version()),
-        Meta::property('site_name', env('SITE_NAME', 'HydePHP')),
+        Meta::property('site_name', env('SITE_NAME', 'Learning Sandbox Online')),
     ],
 
     /*
@@ -269,9 +269,9 @@ return [
 
     'authors' => [
         Author::create(
-            'mr_hyde', // Required username
-            'Mr. Hyde', // Optional display name
-            'https://hydephp.com' // Optional website URL
+            'geoffreyvanwyk', // Required username
+            'Geoffrey Bernardo van Wyk', // Optional display name
+            'https://geoffreyvanwyk.dev' // Optional website URL
         ),
     ],
 
