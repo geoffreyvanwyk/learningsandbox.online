@@ -32,5 +32,5 @@
 - name: Install Moodle instances
   ansible.builtin.import_playbook: moodle.playbook.yml
 
-- name: Set up Homepage
-  ansible.builtin.import_playbook: homepage.playbook.yml
+- name: Set up website
+  ansible.builtin.import_playbook: website.playbook.yml
