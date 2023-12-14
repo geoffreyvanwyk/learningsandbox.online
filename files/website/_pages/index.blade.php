@@ -59,40 +59,6 @@
       </div>
     </div> <!-- End Primary Hero -->
 
-    <!-- Secondary Hero -->
-    <div class="prose-invert hero">
-      <div class="hero-content -z-50 grid w-full grid-cols-1 items-start bg-base-200 md:grid-cols-3">
-
-        <div class="card h-full border shadow-lg">
-          <div class="card-body">
-            <h2 class="card-title"><i class="las la-exclamation-circle"></i> Disclaimer</h2>
-            <p>Learning Sandbox Online is not affiliated with <a href="https://moodle.com">Moodle HQ</a></p>
-          </div>
-        </div>
-
-        <div class="card h-full border shadow-lg">
-          <div class="card-body">
-            <h2 class="card-title"><i class="las la-hourglass-half"></i> Automatic Reset</h2>
-            <p>Every hour, at 30 minutes past the hour, each Moodle instance is reset to default content and
-              configuration.</p>
-          </div>
-        </div>
-
-        <div class="card h-full border shadow-lg">
-          <div class="card-body">
-            <h2 class="card-title"><i class="las la-puzzle-piece"></i> Additional Plugins</h2>
-            <p>The installation of additional plugins are disabled in order to make the automatic upgrade possible.</p>
-          </div>
-        </div>
-
-        <div class="card h-full border shadow-lg">
-          <div class="card-body">
-            <h2 class="card-title"><i class="las la-envelope"></i> Emails</h2>
-            <p>The sending of email messages is disabled to prevent spam.</p>
-          </div>
-        </div>
-
-      </div>
-    </div> <!-- End Secondary Hero -->
+    @include('components.secondary_hero')
   </main>
 @endsection
