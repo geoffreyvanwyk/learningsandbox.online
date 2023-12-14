@@ -1,8 +1,4 @@
 @extends('hyde::layouts.app')
-@push('styles')
-  <link rel="stylesheet"
-        href="https://maxst.icons8.com/vue-static/landings/line-awesome/font-awesome-line-awesome/css/all.min.css">
-@endpush
 @section('content')
   <main id="content">
     <!-- Primary Hero -->
@@ -34,7 +30,7 @@
                  href="/moodle-{{ config('hyde.moodle.versions')->first() }}">
                 Try newest
                 <span class="badge badge-primary">{{ config('hyde.moodle.versions')->first() }}</span>
-                <i class="fas fa-arrow-right text-xl"></i>
+                <i class="las la-arrow-right text-xl"></i>
               </a>
 
               @if (config('hyde.moodle.versions')->count() > 1)
@@ -50,7 +46,7 @@
                         <a href="/moodle-{{ $moodleVersion }}">
                           Try version
                           <span class="badge badge-secondary">{{ $moodleVersion }}</span>
-                          <i class="fas fa-arrow-right text-xl"></i>
+                          <i class="las la-arrow-right text-xl"></i>
                         </a>
                       </li>
                     @endforeach
@@ -69,14 +65,14 @@
 
         <div class="card h-full border shadow-lg">
           <div class="card-body">
-            <h2 class="card-title"><i class="fas fa-exclamation-circle"></i> Disclaimer</h2>
+            <h2 class="card-title"><i class="las la-exclamation-circle"></i> Disclaimer</h2>
             <p>Learning Sandbox Online is not affiliated with <a href="https://moodle.com">Moodle HQ</a></p>
           </div>
         </div>
 
         <div class="card h-full border shadow-lg">
           <div class="card-body">
-            <h2 class="card-title"><i class="fas fa-hourglass-half"></i> Automatic Reset</h2>
+            <h2 class="card-title"><i class="las la-hourglass-half"></i> Automatic Reset</h2>
             <p>Every hour, at 30 minutes past the hour, each Moodle instance is reset to default content and
               configuration.</p>
           </div>
@@ -84,14 +80,14 @@
 
         <div class="card h-full border shadow-lg">
           <div class="card-body">
-            <h2 class="card-title"><i class="fas fa-puzzle-piece"></i> Additional Plugins</h2>
+            <h2 class="card-title"><i class="las la-puzzle-piece"></i> Additional Plugins</h2>
             <p>The installation of additional plugins are disabled in order to make the automatic upgrade possible.</p>
           </div>
         </div>
 
         <div class="card h-full border shadow-lg">
           <div class="card-body">
-            <h2 class="card-title"><i class="fas fa-envelope"></i> Emails</h2>
+            <h2 class="card-title"><i class="las la-envelope"></i> Emails</h2>
             <p>The sending of email messages is disabled to prevent spam.</p>
           </div>
         </div>
