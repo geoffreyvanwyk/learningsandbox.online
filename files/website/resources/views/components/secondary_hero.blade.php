@@ -42,9 +42,9 @@
   <div class="hero-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 
     @foreach ($informationCards as $informationCard)
-      <div class="card h-full border shadow-lg">
-        <div class="card-body">
-          <h2 class="card-title">
+      <div class="prose-invert card h-full border-2 border-secondary">
+        <div class="card-body p-4 md:p-8">
+          <h2 class="card-title text-primary">
             <i class="las la-{{ $informationCard->icon }}"></i>
             {{ $informationCard->title }}
           </h2>
