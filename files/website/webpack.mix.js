@@ -10,7 +10,6 @@ mix.js('resources/assets/app.js', 'app.js')
         require('tailwindcss'),
         require('autoprefixer'),
     ]).setPublicPath('_media')
-    .copy('_media/!(fonts/*)', '_site/media')
-    .copyDirectory('_media/fonts', '_site/fonts');
+    .copy('_media/**/*', '_site');
 
-mix.serve('php hyde serve', { hook: 'beforeCompile' });
+mix.serve('php hyde serve', { hook: 'beforeCompile', dev: false });
