@@ -1,10 +1,13 @@
 @extends('hyde::layouts.app')
 @section('content')
-  <main id="content">
+  <main class="grid h-full grid-cols-1 justify-between"
+        id="content">
     <!-- Primary Hero -->
     <div class="hero bg-base-200"
          style="background-image: url('/media/hero_background.jpg')">
+
       <div class="hero-overlay bg-opacity-60"></div>
+
       <div class="hero-content text-neutral-content md:py-10">
         <section>
           <h1
@@ -13,6 +16,7 @@
                  src="/media/moodle_logo.svg">
             <span class="text-center">at your fingertips</span>
           </h1>
+
           <p class="py-6 text-lg md:text-xl">
             An installation of each supported version of the open source
             learning management system Moodle, the
@@ -24,8 +28,10 @@
             See how it looks, learn how it works, compare features between
             versions, find out what is new.
           </p>
+
           @if (config('hyde.moodle.versions')->count() > 0)
             <div class="flex flex-col items-center justify-center space-y-1 md:flex-row md:justify-start md:space-x-6">
+
               <a class="btn btn-outline btn-wide rounded-full border-2 border-primary text-lg text-neutral-content"
                  href="/moodle-{{ config('hyde.moodle.versions')->first() }}">
                 Try newest
@@ -38,9 +44,9 @@
                   OR
                 </div>
 
-                <details class="dropdown">
+                <details class="dropdown dropdown-top">
                   <summary class="btn btn-secondary btn-wide m-1 rounded-full">Other versions</summary>
-                  <ul class="menu dropdown-content z-[1] w-52 rounded-box bg-base-100 p-2 shadow">
+                  <ul class="menu dropdown-content z-50 w-52 rounded-box bg-base-100 p-2 shadow">
                     @foreach (config('hyde.moodle.versions')->skip(1) as $moodleVersion)
                       <li>
                         <a href="/moodle-{{ $moodleVersion }}">

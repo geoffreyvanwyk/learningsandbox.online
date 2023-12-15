@@ -6,7 +6,7 @@
   @include('hyde::layouts.head')
 </head>
 
-<body class="flex min-h-screen flex-col overflow-x-hidden dark:bg-gray-900 dark:text-white"
+<body class="grid min-h-screen grid-cols-1 justify-between"
       id="app"
       x-data="{ navigationOpen: false }"
       x-on:keydown.escape="navigationOpen = false;">

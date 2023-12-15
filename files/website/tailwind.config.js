@@ -1,6 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+    dark: 'class',
     content: [
         './_pages/*.blade.php',
         './resources/views/**/*.blade.php',

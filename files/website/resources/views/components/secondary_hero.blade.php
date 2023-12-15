@@ -38,13 +38,16 @@
 
 @endphp
 
-<div class="prose-invert hero">
-  <div class="hero-content -z-50 grid w-full grid-cols-1 items-start bg-base-200 md:grid-cols-3">
+<div class="hero">
+  <div class="hero-content grid grid-cols-1 md:grid-cols-3">
 
     @foreach ($informationCards as $informationCard)
       <div class="card h-full border shadow-lg">
         <div class="card-body">
-          <h2 class="card-title"><i class="las la-{{ $informationCard->icon }}"></i> {{ $informationCard->title }}</h2>
+          <h2 class="card-title">
+            <i class="las la-{{ $informationCard->icon }}"></i>
+            {{ $informationCard->title }}
+          </h2>
           <p>{!! $informationCard->description !!}</p>
         </div>
       </div>
