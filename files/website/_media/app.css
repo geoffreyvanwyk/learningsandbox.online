@@ -2562,18 +2562,6 @@ html{
 .z-50{
   z-index: 50;
 }
-.z-\[1\]{
-  z-index: 1;
-}
-.-z-50{
-  z-index: -50;
-}
-.-z-10{
-  z-index: -10;
-}
-.-z-0{
-  z-index: 0;
-}
 .float-right{
   float: right;
 }
@@ -2816,9 +2804,6 @@ html{
 .flex-wrap{
   flex-wrap: wrap;
 }
-.items-start{
-  align-items: flex-start;
-}
 .items-center{
   align-items: center;
 }
@@ -2830,9 +2815,6 @@ html{
 }
 .justify-between{
   justify-content: space-between;
-}
-.justify-around{
-  justify-content: space-around;
 }
 .space-x-2 > :not([hidden]) ~ :not([hidden]){
   --tw-space-x-reverse: 0;
@@ -2882,9 +2864,6 @@ html{
 .rounded-md{
   border-radius: 0.375rem;
 }
-.border{
-  border-width: 1px;
-}
 .border-2{
   border-width: 2px;
 }
@@ -2933,6 +2912,10 @@ html{
 .border-primary{
   --tw-border-opacity: 1;
   border-color: var(--fallback-p,oklch(var(--p)/var(--tw-border-opacity)));
+}
+.border-secondary{
+  --tw-border-opacity: 1;
+  border-color: var(--fallback-s,oklch(var(--s)/var(--tw-border-opacity)));
 }
 .border-transparent{
   border-color: transparent;
@@ -3019,6 +3002,12 @@ html{
 }
 .p-4{
   padding: 1rem;
+}
+.p-6{
+  padding: 1.5rem;
+}
+.p-5{
+  padding: 1.25rem;
 }
 .px-1{
   padding-left: 0.25rem;
@@ -3213,10 +3202,6 @@ html{
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
-.text-gray-800{
-  --tw-text-opacity: 1;
-  color: rgb(31 41 55 / var(--tw-text-opacity));
-}
 .text-indigo-500{
   --tw-text-opacity: 1;
   color: rgb(89 86 235 / var(--tw-text-opacity));
@@ -3228,6 +3213,10 @@ html{
 .text-neutral-content{
   --tw-text-opacity: 1;
   color: var(--fallback-nc,oklch(var(--nc)/var(--tw-text-opacity)));
+}
+.text-primary{
+  --tw-text-opacity: 1;
+  color: var(--fallback-p,oklch(var(--p)/var(--tw-text-opacity)));
 }
 .text-transparent{
   color: transparent;
@@ -3637,6 +3626,10 @@ html{
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .md\:grid-cols-2{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .md\:flex-row{
     flex-direction: row;
   }
@@ -3670,6 +3663,10 @@ html{
 
   .md\:bg-left{
     background-position: left;
+  }
+
+  .md\:p-8{
+    padding: 2rem;
   }
 
   .md\:px-16{
@@ -3754,6 +3751,10 @@ html{
 
   .lg\:ml-8{
     margin-left: 2rem;
+  }
+
+  .lg\:grid-cols-3{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .lg\:bg-center{
