@@ -17,9 +17,9 @@
             <span class="text-center">at your fingertips</span>
           </h1>
 
-          <p class="py-6 text-lg md:text-xl">
+          <p class="prose-invert py-6 text-lg md:text-xl">
             An installation of each supported version of the open source
-            learning management system Moodle, the
+            learning management system <a href="https://moodle.org">Moodle</a>, the
             <span class="font-bold">M</span>odular
             <span class="font-bold">O</span>bject-<span class="font-bold">O</span>riented
             <span class="font-bold">D</span>ynamic
