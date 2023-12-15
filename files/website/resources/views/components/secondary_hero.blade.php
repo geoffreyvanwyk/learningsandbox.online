@@ -6,8 +6,8 @@
           'description' => '
                 Log in as the site administration with:
                 <ul>
-                    <li class="flex justify-between"><span class="font-bold"><i class="las la-user"></i> Username</span> <span>moodler</span></li>
-                    <li class="flex justify-between"><span class="font-bold"><i class="las la-lock"></i> Password</span> <span>N3verstople@rning</span></li>
+                    <li class="flex flex-wrap justify-between"><span class="font-bold"><i class="las la-user"></i> Username</span> <span>moodler</span></li>
+                    <li class="flex flex-wrap justify-between"><span class="font-bold"><i class="las la-lock"></i> Password</span> <span>N3verstople@rning</span></li>
                 </ul>
           ',
       ],
