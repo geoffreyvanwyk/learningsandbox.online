@@ -20,7 +20,7 @@
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
-- name: Homepage
+- name: Website
   hosts: all
 
   vars_files:
@@ -72,11 +72,11 @@
       tags:
         - molecule-idempotence-notest
 
-    - name: Deploy home page
+    - name: Deploy website
       become: true
-      ansible.builtin.template:
-        src: index.html
-        dest: /var/www/html/index.html
+      ansible.builtin.copy:
+        src: website/_site/
+        dest: /var/www/html
         owner: root
         group: root
-        mode: u=rw,g=r,o=r
+        mode: u=rwX,g=rX,o=rX
