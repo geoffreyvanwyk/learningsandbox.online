@@ -120,13 +120,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: website
-          path: files/website
-
-      - name: Debug
-        run: |
-          ls -l
-          ls -l files
-          ls -l files/website
+          path: files/website/_site
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
