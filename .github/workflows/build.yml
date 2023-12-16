@@ -72,6 +72,9 @@ jobs:
   website:
     name: Build website
     needs: ansible-lint
+    defaults:
+      run:
+        working-directory: ./files/website
     runs-on: ubuntu-latest
 
     steps:
@@ -81,7 +84,7 @@ jobs:
       - name: Install Composer dependencies.
         uses: php-actions/composer@v6
         with:
-          working_dir: files/website
+          working_dir: ./files/website
 
       - name: Build the templates.
         run: php hyde build
@@ -92,9 +95,7 @@ jobs:
           node-version: 20.0.0
 
       - name: Install NPM dependencies.
-        run: |
-          cd files/website
-          npm install
+        run: npm install
 
       - name: Build assets.
         run: npm run prod
