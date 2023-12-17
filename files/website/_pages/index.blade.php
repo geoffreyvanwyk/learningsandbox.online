@@ -36,7 +36,7 @@
                  href="/moodle-{{ config('hyde.moodle.versions')->first() }}">
                 Try newest
                 <span class="badge badge-primary">{{ config('hyde.moodle.versions')->first() }}</span>
-                <i class="las la-arrow-right text-xl"></i>
+                <i class="bx bx-right-arrow-alt text-xl"></i>
               </a>
 
               @if (config('hyde.moodle.versions')->count() > 1)
@@ -52,7 +52,7 @@
                         <a href="/moodle-{{ $moodleVersion }}">
                           Try version
                           <span class="badge badge-secondary">{{ $moodleVersion }}</span>
-                          <i class="las la-arrow-right text-xl"></i>
+                          <i class="bx bx-right-arrow-alt text-xl"></i>
                         </a>
                       </li>
                     @endforeach

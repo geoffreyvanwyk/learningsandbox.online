@@ -2,29 +2,29 @@
   $informationCards = collect([
       [
           'title' => 'Credentials',
-          'icon' => 'user-lock',
+          'icon' => 'key',
           'description' => '
                 Log in as the site administration with:
                 <ul>
-                    <li class="flex flex-wrap justify-between"><span class="font-bold"><i class="las la-user"></i> Username</span> <span>moodler</span></li>
-                    <li class="flex flex-wrap justify-between"><span class="font-bold"><i class="las la-lock"></i> Password</span> <span>N3verstople@rning</span></li>
+                    <li class="flex flex-wrap justify-between"><span class="font-bold"><i class="bx bx-user"></i> Username</span> <span>moodler</span></li>
+                    <li class="flex flex-wrap justify-between"><span class="font-bold"><i class="bx bx-lock"></i> Password</span> <span>N3verstople@rning</span></li>
                 </ul>
           ',
       ],
       [
           'title' => 'Disclaimer',
-          'icon' => 'exclamation-circle',
+          'icon' => 'error',
           'description' => 'Learning Sandbox Online is not affiliated with <a href="https://moodle.com">Moodle HQ</a>',
       ],
       [
           'title' => 'Automatic Reset',
-          'icon' => 'hourglass-half',
+          'icon' => 'hourglass',
           'description' => 'Every hour, at 30 minutes past the hour, each Moodle instance is reset to default content and
                 configuration.',
       ],
       [
           'title' => 'Additional Plugins',
-          'icon' => 'puzzle-piece',
+          'icon' => 'plug',
           'description' => 'The installation of additional plugins are disabled in order to make the automatic upgrade possible.',
       ],
       [
@@ -45,7 +45,7 @@
       <div class="prose-invert card h-full border-2 border-secondary">
         <div class="card-body p-4 md:p-8">
           <h2 class="card-title text-primary">
-            <i class="las la-{{ $informationCard->icon }}"></i>
+            <i class="bx bx-{{ $informationCard->icon }}"></i>
             {{ $informationCard->title }}
           </h2>
           <p>{!! $informationCard->description !!}</p>
