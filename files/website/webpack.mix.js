@@ -11,4 +11,5 @@ mix
         require('autoprefixer'),
     ])
     .setPublicPath('_site/media')
-    .copyDirectory('_site/media', '_media');
+    .copyDirectory('_site/media', '_media')
+    .copyDirectory('_site/media/fonts/', '_site');
