@@ -10,6 +10,8 @@ mix
         require('tailwindcss'),
         require('autoprefixer'),
     ])
-    .setPublicPath('_site/media')
-    .copyDirectory('_site/media', '_media')
-    .copyDirectory('_site/media/fonts/', '_site');
+    .setPublicPath('_site')
+    .copy('_site/app.css', '_site/media')
+    .copy('_site/app.js', '_site/media')
+    .copy('_site/app.css', '_media')
+    .copy('_site/app.js', '_media');
