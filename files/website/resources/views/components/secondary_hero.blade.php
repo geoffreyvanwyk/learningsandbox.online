@@ -4,10 +4,28 @@
           'title' => 'Credentials',
           'icon' => 'key',
           'description' => '
-                Log in as the site administration with:
+                Click each credential to copy it.
+
                 <ul>
-                    <li class="flex flex-wrap justify-between"><span class="font-bold"><i class="bx bx-user"></i> Username</span> <span>moodler</span></li>
-                    <li class="flex flex-wrap justify-between"><span class="font-bold"><i class="bx bx-lock"></i> Password</span> <span>N3verstople@rning</span></li>
+                    <li class="flex flex-wrap justify-between">
+                      <span class="font-bold">
+                        <i class="bx bx-user"></i> Username
+                      </span>
+                      <span class="cursor-pointer space-x-2" title="Click to copy" x-clipboard.raw="moodler">
+                        <span>moodler</span>
+                        <i class="bx bx-copy"></i>
+                      </span>
+                    </li>
+
+                    <li class="flex flex-wrap justify-between">
+                      <span class="font-bold">
+                        <i class="bx bx-lock"></i> Password
+                      </span>
+                      <span class="cursor-pointer space-x-2" title="Click to copy" x-clipboard.raw="N3verstople@rning">
+                        <span>N3verstople@rning</span>
+                        <i class="bx bx-copy"></i>
+                        </span>
+                    </li>
                 </ul>
           ',
       ],
@@ -25,7 +43,7 @@
       [
           'title' => 'Additional Plugins',
           'icon' => 'plug',
-          'description' => 'The installation of additional plugins are disabled in order to make the automatic upgrade possible.',
+          'description' => 'The installation of additional plugins are disabled to make the automatic upgrades possible.',
       ],
       [
           'title' => 'Emails',
