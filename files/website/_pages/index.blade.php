@@ -48,7 +48,7 @@
                   <summary class="btn btn-secondary btn-wide m-1 rounded-full">Other versions</summary>
                   <ul class="menu dropdown-content z-50 w-52 rounded-box bg-base-100 p-2 shadow">
                     @foreach (config('hyde.moodle.versions')->skip(1) as $moodleVersion)
-                      <li>
+                      <li class="text-black">
                         <a href="/moodle-{{ $moodleVersion }}">
                           Try version
                           <span class="badge badge-secondary">{{ $moodleVersion }}</span>

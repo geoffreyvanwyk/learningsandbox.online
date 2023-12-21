@@ -97,6 +97,6 @@ module.exports = {
     ],
 
     daisyui: {
-        themes: ['halloween']
+        themes: ['cupcake']
     }
 };
