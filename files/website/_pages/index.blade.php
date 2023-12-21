@@ -3,8 +3,7 @@
   <main class="grid h-full grid-cols-1 justify-between"
         id="content">
     <!-- Primary Hero -->
-    <div class="hero bg-base-200"
-         style="background-image: url('/media/hero_background.jpg')">
+    <div class="hero bg-base-200 bg-[url('/media/hero_background.jpg')]">
 
       <div class="hero-overlay bg-opacity-60"></div>
 
@@ -44,7 +43,7 @@
                   OR
                 </div>
 
-                <details class="dropdown dropdown-top">
+                <details class="dropdown-top dropdown">
                   <summary class="btn btn-secondary btn-wide m-1 rounded-full">Other versions</summary>
                   <ul class="menu dropdown-content z-50 w-52 rounded-box bg-base-100 p-2 shadow">
                     @foreach (config('hyde.moodle.versions')->skip(1) as $moodleVersion)
