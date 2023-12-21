@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="halloween"
+<html data-theme="cupcake"
       lang="{{ config('hyde.language', 'en') }}">
 
 <head>

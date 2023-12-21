@@ -2,10 +2,10 @@
   $navigation = \Hyde\Framework\Features\Navigation\NavigationMenu::create();
 @endphp
 
-<nav class="flex flex-wrap items-center justify-between bg-gray-800 p-4 shadow-lg sm:shadow-xl md:shadow-none"
+<nav class="flex flex-wrap items-center justify-between p-4 shadow-lg sm:shadow-xl md:shadow-none"
      id="main-navigation"
      aria-label="Main navigation">
-  <div class="flex flex-shrink-0 flex-grow items-center text-gray-200">
+  <div class="flex flex-shrink-0 flex-grow items-center text-primary">
     @include('hyde::components.navigation.navigation-brand')
 
     <div class="ml-auto">
@@ -14,7 +14,7 @@
   </div>
 
   <div class="block md:hidden">
-    <button class="flex items-center px-3 py-1 text-gray-200 hover:text-gray-700"
+    <button class="flex items-center px-3 py-1 text-gray-400 hover:text-gray-700"
             id="navigation-toggle-button"
             aria-label="Toggle navigation menu"
             @click="navigationOpen = ! navigationOpen">
@@ -57,7 +57,7 @@
     <ul class="justify-end md:flex md:flex-grow"
         aria-label="Navigation links">
       @foreach ($navigation->items as $item)
-        <li class="md:mx-2">
+        <li class="text-secondary md:mx-2">
           @if ($item instanceof \Hyde\Framework\Features\Navigation\DropdownNavItem)
             <x-hyde::navigation.dropdown :label="\Hyde\Hyde::makeTitle($item->label)"
                                          :items="$item->items" />

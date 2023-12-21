@@ -42,7 +42,7 @@
   <div class="hero-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 
     @foreach ($informationCards as $informationCard)
-      <div class="prose-invert card h-full border-2 border-secondary">
+      <div class="border-1 prose-invert card h-full border-accent bg-white shadow-lg">
         <div class="card-body p-4 md:p-8">
           <h2 class="card-title text-primary">
             <i class="bx bx-{{ $informationCard->icon }}"></i>
