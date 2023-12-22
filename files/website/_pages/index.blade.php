@@ -32,7 +32,8 @@
             <div class="flex flex-col items-center justify-center space-y-1 md:flex-row md:justify-start md:space-x-6">
 
               <a class="btn btn-outline btn-wide rounded-full border-2 border-primary text-lg text-neutral-content"
-                 href="/moodle-{{ config('hyde.moodle.versions')->first() }}">
+                 href="/moodle-{{ config('hyde.moodle.versions')->first() }}"
+                 target="_blank">
                 Try newest
                 <span class="badge badge-primary">{{ config('hyde.moodle.versions')->first() }}</span>
                 <i class="bx bx-right-arrow-alt text-xl"></i>
@@ -48,7 +49,8 @@
                   <ul class="menu dropdown-content z-50 w-52 rounded-box bg-base-100 p-2 shadow">
                     @foreach (config('hyde.moodle.versions')->skip(1) as $moodleVersion)
                       <li class="text-black">
-                        <a href="/moodle-{{ $moodleVersion }}">
+                        <a href="/moodle-{{ $moodleVersion }}"
+                           target="_blank">
                           Try version
                           <span class="badge badge-secondary">{{ $moodleVersion }}</span>
                           <i class="bx bx-right-arrow-alt text-xl"></i>
