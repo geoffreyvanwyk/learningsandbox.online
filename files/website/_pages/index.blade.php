@@ -1,4 +1,5 @@
 @extends('hyde::layouts.app')
+@php($title = 'Home')
 @section('content')
   <main class="grid h-full grid-cols-1 justify-between"
         id="content">
