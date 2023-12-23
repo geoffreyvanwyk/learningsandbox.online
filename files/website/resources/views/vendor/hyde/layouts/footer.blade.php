@@ -39,3 +39,8 @@
     </a>
   </footer>
 @endif
+@push('scripts')
+  <script async
+          src="https://eu.umami.is/script.js"
+          data-website-id="881e7ff7-80a6-4289-b5aa-f9eab3ba08fd"></script>
+@endpush
