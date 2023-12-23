@@ -35,4 +35,6 @@
     moodle_cfg_noemailever: true
     moodle_cfg_preventexecpath: true
     moodle_cfg_forcedsettings:
-      additionalhtmlfooter: "{{ lookup('file', 'countdown.html') }}"
+      additionalhtmlfooter: |
+        {{ lookup('file', 'countdown.html') }}
+        {{ lookup('file', 'umami_analytics.html') }}
