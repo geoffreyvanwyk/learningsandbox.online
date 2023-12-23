@@ -50,6 +50,14 @@
           'icon' => 'envelope',
           'description' => 'The sending of email messages is disabled to prevent spam.',
       ],
+      [
+          'title' => 'Support',
+          'icon' => 'help-circle',
+          'description' => '
+              For support in installing or upgrading Moodle or for plugin development,
+              contact us at <a href="mailto:info@learningsandbox.online">info@learningsandbox.online</a>
+          ',
+      ],
   ])->transform(function ($informationCard) {
       return (object) $informationCard;
   });
