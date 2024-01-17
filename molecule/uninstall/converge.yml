@@ -1,0 +1,16 @@
+---
+- name: Converge
+  hosts: all
+
+  tasks:
+    - name: Override default variables with facts
+      ansible.builtin.set_fact:
+        sandbox_domain: learningsandbox.test
+        sandbox_domain_aliases: []
+        sandbox_environment: development
+        sandbox_versions:
+          - branch: MOODLE_401_STABLE
+            version: 4.1
+
+- name: Import uninstall playbook
+  ansible.builtin.import_playbook: ../../moodle_uninstall.playbook.yml
