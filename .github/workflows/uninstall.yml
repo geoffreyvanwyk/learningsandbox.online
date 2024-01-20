@@ -1,0 +1,60 @@
+---
+# This file is part of Learning Sandbox Online.
+#
+# Learning Sandbox Online is free software: you can redistribute it
+# and/or modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Learning Sandbox Online is distributed in the hope that it will be
+# useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+# Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along with
+# Learning Sandbox Online. If not, see <https://www.gnu.org/licenses/>.
+
+##
+# GitHub Actions workflow for uninstalling unsupported versions of Moodle.
+#
+# @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
+# @link       https://docs.github.com/en/actions GitHub Actions
+##
+
+name: Uninstall
+on: workflow_dispatch  # yamllint disable-line rule:truthy
+
+jobs:
+  ansible-playbook:
+    name: Run playbook
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Check out the codebase
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+
+      - name: Install required Python packages
+        run: pip3 install --requirement requirements.txt
+
+      - name: Install playbooks dependencies
+        run: ansible-galaxy role install --role-file requirements.yml
+
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+      - name: Run plays
+        run: >
+          ansible-playbook moodle_uninstall.playbook.yml
+          --inventory ${{ secrets.ANSIBLE_INVENTORY }},
+          --user ${{ secrets.ANSIBLE_USER }}
+        env:
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
