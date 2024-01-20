@@ -24,6 +24,7 @@
   ansible.builtin.include_role:
     name: geoffreyvanwyk.moodle_uninstall
   vars:
+    # noqa: var-naming[no-role-prefix]
     moodle_web_domain: "{{ sandbox_domain }}"
     moodle_web_path: moodle-{{ item }}
     moodle_deploy_destination: /var/www/html/moodle-{{ item }}
