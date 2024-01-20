@@ -467,6 +467,6 @@ return [
     */
 
     'moodle' => [
-        'versions' => collect(explode(',', env('MOODLE_VERSIONS', '4.2,4.1,4.0,3.11,3.9'))),
+        'versions' => collect(explode(',', env('MOODLE_VERSIONS', '4.2,4.1'))),
     ],
 ];
