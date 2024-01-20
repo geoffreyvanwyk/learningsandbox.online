@@ -36,3 +36,7 @@
     - name: Uninstall unsupported Moodle instances
       loop: "{{ sandbox_unsupported_versions }}"
       ansible.builtin.include_tasks: tasks/uninstall_moodle.yml
+
+    - name: Clean up reset objects
+      loop: "{{ sandbox_unsupported_versions }}"
+      ansible.builtin.include_tasks: tasks/clean_up_moodle_reset.yml
