@@ -28,9 +28,9 @@
 
   vars:
     sandbox_unsupported_versions:
-      - 3.9
-      - 3.11
-      - 4.0
+      - '3.9'
+      - '3.11'
+      - '4.0'
 
   tasks:
     - name: Uninstall unsupported Moodle instances
