@@ -22,4 +22,5 @@
 
 - name: geoffreyvanwyk.php
 - name: geoffreyvanwyk.moodle
+- name: geoffreyvanwyk.moodle_uninstall
 - name: geerlingguy.certbot
