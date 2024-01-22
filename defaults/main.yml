@@ -20,7 +20,7 @@
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
-sandbox_environment: production  # other values: development
+sandbox_environment: production # other values: development
 
 sandbox_name: Learning Sandbox Online
 sandbox_domain: learningsandbox.online
@@ -30,9 +30,9 @@ sandbox_email: info@learningsandbox.online
 sandbox_github: https://github.com/geoffreyvanwyk/learningsandbox.online
 
 sandbox_versions:
-  - version: '4.1'
-    tag: v4.1.8 
-  - version: '4.2'
-    tag: v4.2.5 
-  - version: '4.3'
-    tag: v4.3.2 
+  - version: "4.1"
+    tag: v4.1.8
+  - version: "4.2"
+    tag: v4.2.5
+  - version: "4.3"
+    tag: v4.3.2
