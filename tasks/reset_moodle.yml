@@ -29,10 +29,10 @@
     sandbox_moodledata: >-
       /var/www/moodledata-{{ sandbox_domain }}-moodle-{{ sandbox_item.version }}
     sandbox_php_version: "{{
-           '8.1' if (sandbox_item.branch == 'MOODLE_402_STABLE') or
-                    (sandbox_item.branch == 'MOODLE_401_STABLE')
-      else '8.0' if (sandbox_item.branch == 'MOODLE_400_STABLE') or
-                    (sandbox_item.branch == 'MOODLE_311_STABLE')
+           '8.1' if (sandbox_item.version == '4.2') or
+                    (sandbox_item.version == '4.1')
+      else '8.0' if (sandbox_item.version == '4.0') or
+                    (sandbox_item.version == '3.11')
       else '7.4' }}"
 
 - name: Set dependent variables [{{ sandbox_item.version }}]
