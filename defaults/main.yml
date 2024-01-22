@@ -30,7 +30,9 @@ sandbox_email: info@learningsandbox.online
 sandbox_github: https://github.com/geoffreyvanwyk/learningsandbox.online
 
 sandbox_versions:
-  - branch: MOODLE_401_STABLE
-    version: 4.1
-  - branch: MOODLE_402_STABLE
-    version: 4.2
+  - version: '4.1'
+    tag: v4.1.8 
+  - version: '4.2'
+    tag: v4.2.5 
+  - version: '4.3'
+    tag: v4.3.2 

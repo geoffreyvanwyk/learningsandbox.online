@@ -16,6 +16,6 @@ provisioner:
     host_vars:
       learningsandboxonline_molecule_${MOLECULE_DISTRO:-ubuntu2204}:
         ansible_user: ubuntu
-        moodle_deploy_version: ${MOLECULE_MOODLE_VERSION:-MOODLE_402_STABLE}
+        moodle_deploy_version: ${MOLECULE_MOODLE_VERSION:-v4.3.2}
 verifier:
   name: ansible
