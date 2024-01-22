@@ -8,8 +8,8 @@
         sandbox_domain_aliases: []
         sandbox_environment: development
         sandbox_versions:
-          - tag: v4.3.2 
-            version: '4.3'
+          - tag: v4.3.2
+            version: "4.3"
 
 - name: Import main playbook
   ansible.builtin.import_playbook: ../../main.playbook.yml
