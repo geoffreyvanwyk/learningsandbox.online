@@ -29,11 +29,14 @@
     sandbox_moodledata: >-
       /var/www/moodledata-{{ sandbox_domain }}-moodle-{{ sandbox_item.version }}
     sandbox_php_version: "{{
-           '8.1' if (sandbox_item.branch == 'MOODLE_402_STABLE') or
-                    (sandbox_item.branch == 'MOODLE_401_STABLE')
-      else '8.0' if (sandbox_item.branch == 'MOODLE_400_STABLE') or
-                    (sandbox_item.branch == 'MOODLE_311_STABLE')
-      else '7.4' }}"
+      '8.2'
+      if sandbox_item.branch in ['MOODLE_403_STABLE', 'MOODLE_402_STABLE']
+      else '8.1'
+      if sandbox_item.branch in ['MOODLE_401_STABLE']
+      else '8.0'
+      if sandbox_item.branch in ['MOODLE_400_STABLE', 'MOODLE_311_STABLE']
+      else '7.4'
+      }}"
 
 - name: Set dependent variables [{{ sandbox_item.version }}]
   ansible.builtin.set_fact:

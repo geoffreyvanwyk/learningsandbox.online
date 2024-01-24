@@ -34,3 +34,5 @@ sandbox_versions:
     version: 4.1
   - branch: MOODLE_402_STABLE
     version: 4.2
+  - branch: MOODLE_403_STABLE
+    version: 4.3
