@@ -24,7 +24,7 @@
   ansible.builtin.include_role:
     name: geoffreyvanwyk.moodle
   vars:
-    moodle_deploy_version: "{{ sandbox_item.tag }}"
+    moodle_deploy_version: "{{ sandbox_item.branch }}"
     moodle_deploy_destination: /var/www/html/moodle-{{ sandbox_item.version }}
     moodle_deploy_update: no
     moodle_web_protocol: https
