@@ -8,8 +8,8 @@
         sandbox_domain_aliases: []
         sandbox_environment: development
         sandbox_versions:
-          - tag: v4.3.2
-            version: '4.3'
+          - branch: MOODLE_39_STABLE
+            version: 3.9
 
 - name: Import reset playbook
   ansible.builtin.import_playbook: ../../moodle_reset.playbook.yml
