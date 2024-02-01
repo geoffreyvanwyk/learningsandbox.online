@@ -9,8 +9,8 @@
         sandbox_domain_aliases: []
         sandbox_environment: development
         sandbox_versions:
-          - branch: MOODLE_400_STABLE
-            version: 4.0
+          - branch: MOODLE_403_STABLE
+            version: 4.3
 
 - name: Import main playbook
   ansible.builtin.import_playbook: ../../main.playbook.yml

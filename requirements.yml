@@ -20,7 +20,11 @@
 # @copyright  2023 Geoffrey Bernardo van Wyk (https://geoffreyvanwyk.dev)
 ##
 
-- name: geoffreyvanwyk.php
-- name: geoffreyvanwyk.moodle
-- name: geoffreyvanwyk.moodle_uninstall
-- name: geerlingguy.certbot
+roles:
+  - name: geoffreyvanwyk.php
+  - name: geoffreyvanwyk.moodle
+  - name: geoffreyvanwyk.moodle_uninstall
+  - name: geerlingguy.certbot
+
+collections:
+  - name: geoffreyvanwyk.moodle
