@@ -38,3 +38,11 @@
       additionalhtmlfooter: |
         {{ lookup('file', 'countdown.html') }}
         {{ lookup('file', 'umami_analytics.html') }}
+      adminusername: "{{ moodle_admin_username }}"
+      adminpassword: "{{ moodle_admin_password }}"
+      theme: learningsandboxonline
+    moodle_plugins_git:
+      - name: theme_learningsandboxonline
+        repository: >-
+          https://github.com/geoffreyvanwyk/moodle-theme_learningsandboxonline
+        version: "{{ sandbox_item.branch }}"
