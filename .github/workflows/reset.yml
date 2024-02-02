@@ -47,7 +47,7 @@ jobs:
       - name: Install playbooks dependencies
         run: |
           ansible-galaxy role install --role-file requirements.yml
-          ansible-galaxy collection install --role-file requirements.yml
+          ansible-galaxy collection install --requirements-file requirements.yml
 
       - name: Install SSH key.
         uses: shimataro/ssh-key-action@v2
